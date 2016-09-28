@@ -1,4 +1,2 @@
-# cistoGitHub
-haha
+# 	Tým 088, varianta a/4/II
 
-Hi, I am Martin!
