@@ -4,4 +4,5 @@ project(IFJ_88)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
 
 set(SOURCE_FILES main.c)
-add_executable(IFJ_88 ${SOURCE_FILES})
+add_executable(IFJ_88 ${SOURCE_FILES} ijo.c)
+add_executable(ijo ijo.c)
