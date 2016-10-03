@@ -3,9 +3,8 @@
 #include <stdio.h>
 
 int main() {
-gfdgdfdfgs
-    printf("Hello, World hgjsafaasfasfasfasfasfasfa g!");
+
+    printf("Hello, World asdasfssgf g!");
 
     return 0;
-    sdrtdfg
 }
