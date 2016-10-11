@@ -8,7 +8,7 @@
 
 #include "vyrazy.h"
 
-void main(){}
+void main(){printf("%d\n",MEN);}
 
 /*
  * precedencna tabulka

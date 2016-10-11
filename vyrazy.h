@@ -23,7 +23,6 @@ typedef enum{
     LZATVORKA,          // (
     PZATVORKA,          // )
     ID,                 // identifikator(premenna)
-
 }enumVyrazy;
 
 typedef enum{
