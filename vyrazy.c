@@ -17,20 +17,21 @@ void main(){}
 */
 
 const enumRovnost precTabulka[POCET_VYRAZOV][POCET_VYRAZOV]={
-            //+  ,  -  ,  *  ,  /  ,  <  ,  >  ,  <= ,  >= ,  == ,  != ,  (  ,  )  ,  id ,  $
-    /*+*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
-    /*-*/   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+             //+  ,  -  ,  *  ,  /  ,  <  ,  >  ,  <= ,  >= ,  == ,  != ,  (  ,  )  ,  id ,  $
+ /*  +  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  -  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* \*  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  /  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  <  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  >  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* <=  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* >=  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* ==  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* !=  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  (  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  )  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /* id  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
+ /*  $  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC},
 };
 
 
