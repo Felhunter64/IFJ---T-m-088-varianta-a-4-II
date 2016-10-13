@@ -33,6 +33,11 @@ typedef enum{
     ZLE     // syntakticka chyba
 }enumRovnost;
 
+typedef struct{
+    char* token;
+    int typ;
+}tToken;
+
 void spustiVyrazy();
 
 #endif //IFJ_88_VYRAZY_H

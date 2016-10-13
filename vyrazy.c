@@ -7,8 +7,9 @@
 #include <stdio.h>
 
 #include "vyrazy.h"
+#include "memory.h"
 
-void main(){printf("%d\n",MEN);}
+void main(){printf("ajajaaaj %d\n",ZLE);}
 
 /*
  * precedencna tabulka
@@ -32,6 +33,8 @@ const enumRovnost precTabulkaPreIf[POCET_VYRAZOV][POCET_VYRAZOV]={
  /*  $  */   {MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , ZLE , MEN , ZLE , ZLE},
  /*  ,  */   {MEN , MEN , MEN , MEN , ZLE , ZLE , ZLE , ZLE , ZLE , ZLE , MEN , ROV , MEN , ZLE , ROV},
 };
+
+
 
 
 
