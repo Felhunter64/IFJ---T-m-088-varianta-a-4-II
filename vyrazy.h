@@ -5,7 +5,7 @@
 #ifndef IFJ_88_VYRAZY_H
 #define IFJ_88_VYRAZY_H
 
-#define POCET_VYRAZOV 14
+#define POCET_VYRAZOV_PRE_IF 14
 
 
 
@@ -22,13 +22,15 @@ typedef enum{
     NEROVNASA,          // !=
     LZATVORKA,          // (
     PZATVORKA,          // )
-    ID,                 // identifikator(premenna)
+    ID,                 // identifikator(premenna, funkcia, objekt(premenna), objekt(funkcia), literal)
+    CIARKA              // ,
 }enumVyrazy;
 
 typedef enum{
-    VAC,  // >
-    MEN,  // <
-    ROV // ==
+    VAC,    // >
+    MEN,    // <
+    ROV,    // ==
+    ZLE     // syntakticka chyba
 }enumRovnost;
 
 void spustiVyrazy();
