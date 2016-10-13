@@ -5,8 +5,7 @@
 #ifndef IFJ_88_VYRAZY_H
 #define IFJ_88_VYRAZY_H
 
-#define POCET_VYRAZOV_PRE_IF 14
-
+#define POCET_VYRAZOV 15
 
 
 typedef enum{
@@ -23,6 +22,7 @@ typedef enum{
     LZATVORKA,          // (
     PZATVORKA,          // )
     ID,                 // identifikator(premenna, funkcia, objekt(premenna), objekt(funkcia), literal)
+    DOLAR,              // koniec
     CIARKA              // ,
 }enumVyrazy;
 
