@@ -33,9 +33,9 @@ typedef enum{
     ZLE     // syntakticka chyba
 }enumRovnost;
 
-typedef struct{
-    char* token;
-    int typ;
+typedef struct sToken {
+    char *stringToken;
+    int numToken;
 }tToken;
 
 void spustiVyrazy();

@@ -41,7 +41,7 @@ tAddress* insertAddress(int addressNum, tTableOfAddress *htable){
 
     if(htable->arr[hashKey] == NULL){
         htable->arr[hashKey] = newAddress;
-        printf("%u\n", addressNum);
+        //delete printf("%u\n", addressNum);
         return newAddress;
     }
 
@@ -56,7 +56,7 @@ tAddress* insertAddress(int addressNum, tTableOfAddress *htable){
 }
 
 
-//odstrani tAdresu z hesovacej tabulky a vrati jej adresu
+//odstrani tAdresu z hesovacej tabulky a vrati jej hodnotu premennej address
 void* retrieveAddress(int addressNum, tTableOfAddress *htable){
     int hashKey = (int) addressNum % htable->size;
     void* address;
@@ -112,7 +112,7 @@ void deleteHtable(tTableOfAddress *htable){
 
 //malokuje pamat o velkosti size a zaroven adresu prida dao hes tabulky,
 //v pripade neuspechu vrati hodnotu NULL
-void* malokuj(int size, tTableOfAddress *htable){
+void* xMalloc(int size, tTableOfAddress *htable){
     void* ptr;
 
     if((ptr = malloc(sizeof(size))) == NULL)
@@ -125,7 +125,7 @@ void* malokuj(int size, tTableOfAddress *htable){
 }
 
 
-int uvolni(void* ptr, tTableOfAddress *htable){
+int xFree(void* ptr, tTableOfAddress *htable){
     void *address = retrieveAddress(ptr, htable);
     //delete printf("free %u\n", address);
     if(address == NULL)
@@ -137,28 +137,29 @@ int uvolni(void* ptr, tTableOfAddress *htable){
     return 0;
 }
 
+/*delete
 int main(){
     tTableOfAddress* htable = createHtable(2);
     char* aha;
-    aha = malokuj(4, htable);
+    aha = xMalloc(4, htable);
     if(aha == NULL)
         return INTERNA_CHYBA;
 
     //delete printf("%u\n", aha);
 
-    if((uvolni(aha, htable)) == INTERNA_CHYBA)
+    if((xFree(aha, htable)) == INTERNA_CHYBA)
         return INTERNA_CHYBA;
 
-    aha = malokuj(4, htable);
+    aha = xMalloc(4, htable);
     if(aha == NULL)
         return INTERNA_CHYBA;
-    aha = malokuj(4, htable);
+    aha = xMalloc(4, htable);
     if(aha == NULL)
         return INTERNA_CHYBA;
-    aha = malokuj(4, htable);
+    aha = xMalloc(4, htable);
     if(aha == NULL)
         return INTERNA_CHYBA;
-    aha = malokuj(4, htable);
+    aha = xMalloc(4, htable);
     if(aha == NULL)
         return INTERNA_CHYBA;
     deleteHtable(htable);
@@ -166,3 +167,4 @@ int main(){
     return 0;
 
 }
+ */

@@ -16,7 +16,7 @@ void main(){printf("ajajaaaj %d\n",ZLE);}
  *
 */
 
-const enumRovnost precTabulkaPreIf[POCET_VYRAZOV][POCET_VYRAZOV]={
+const enumRovnost precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
              //+  ,  -  ,  *  ,  /  ,  <  ,  >  ,  <= ,  >= ,  == ,  != ,  (  ,  )  ,  id ,  $  ,  \,
  /*  +  */   {VAC , VAC , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},
  /*  -  */   {VAC , VAC , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},

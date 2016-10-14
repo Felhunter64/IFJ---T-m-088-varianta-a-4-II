@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 
-
 #include "vyrazy.h"
 #include "scanner.h"
 

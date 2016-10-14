@@ -16,5 +16,16 @@ typedef struct sAddress{
 }tAddress;
 
 
+//vracia adresu na ktorej je malokovane miesto o velkosti size a zapise ju do hes tabulky htable
+//v pripade neuspechu vracia NULL
+void* xMalloc(int size, tTableOfAddress *htable);
+//uvolni adresu ptr z hes tabulky htable, v pripade neuspechu vracia error hdnotu
+int xFree(void *ptr, tTableOfAddress *htable);
+void deleteHtable(tTableOfAddress *htable);
+tTableOfAddress* createHtable(int size);
+
+void* retrieveAddress(int addressNum, tTableOfAddress *htable);
+tAddress* insertAddress(int addressNum, tTableOfAddress *htable);
+
 
 #endif //IFJ_88_GARBAGE_COLLECTOR_H
