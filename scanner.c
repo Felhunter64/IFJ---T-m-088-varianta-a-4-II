@@ -4,6 +4,8 @@
 //todo funkcia na prevod stringu na cislo pre EDKA
 //todo ked dostanem EOF tak freeujem string ....
 //todo namallocovanie stringu
+//todo prepisat enumVyrazy z knihovne vyrazy.h do anglictiny
+
 
 #define dlzka_tokenu=50
 
