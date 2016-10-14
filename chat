@@ -1,6 +1,7 @@
-podla mna ste vsetci kokoti len sulo je magic
-DAVID prejavuje nesuhlasshjbkhbj
+konvencie:
 
-ijhn
-
-podla mna na tomto subore vidiet najviac prace
+1.  //delete nieco     -ak si to chcete ponechat, ale na konci to bude aj tak treba vymazat
+2.  /*vymazat*/        -to iste pre viac riadkove zakomentovanie
+2.  //todo              -uzitocne
+3.  struktury oznacujte so zaciatocnym pismenom t alebo s: tAddress, sAdrress(pre struct Address)
+4.  funkcie: fooNieco

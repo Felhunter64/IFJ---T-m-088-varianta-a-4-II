@@ -31,7 +31,7 @@ tTableOfAddress* createHtable(int size){
 tAddress* insertAddress(int addressNum, tTableOfAddress *htable){
     tAddress* newAddress;
     int hashKey = (int) addressNum % htable->size;
-    printf("h %d\n", hashKey);
+    //delete printf("h %d\n", hashKey);
 
     if((newAddress = malloc(sizeof(tAddress))) == NULL)
         return NULL;
@@ -60,14 +60,14 @@ tAddress* insertAddress(int addressNum, tTableOfAddress *htable){
 void* retrieveAddress(int addressNum, tTableOfAddress *htable){
     int hashKey = (int) addressNum % htable->size;
     void* address;
-    printf("%u\n", addressNum);
-    printf("h %d\n", hashKey);
+    //delete printf("%u\n", addressNum);
+    //delete printf("h %d\n", hashKey);
     if(htable->arr[hashKey] == NULL){
         return NULL;
     }
 
     tAddress *tmpAddress = htable->arr[hashKey];
-    printf("f%u\n", tmpAddress->address);
+    //delete printf("f%u\n", tmpAddress->address);
     if(tmpAddress->address == addressNum){
         htable->arr[hashKey] = tmpAddress->nextAddress;
         address = tmpAddress->address;
@@ -117,7 +117,7 @@ void* malokuj(int size, tTableOfAddress *htable){
 
     if((ptr = malloc(sizeof(size))) == NULL)
         return NULL;
-    printf("%u\n", ptr);
+    //delete printf("%u\n", ptr);
     if(insertAddress(ptr, htable) == NULL)
         NULL;
 
@@ -127,11 +127,11 @@ void* malokuj(int size, tTableOfAddress *htable){
 
 int uvolni(void* ptr, tTableOfAddress *htable){
     void *address = retrieveAddress(ptr, htable);
-    printf("free %u\n", address);
+    //delete printf("free %u\n", address);
     if(address == NULL)
         return INTERNA_CHYBA;
 
-    printf("super%u\n", address);
+    //delete printf("super%u\n", address);
     free(address);
 
     return 0;
@@ -144,7 +144,7 @@ int main(){
     if(aha == NULL)
         return INTERNA_CHYBA;
 
-    printf("%u\n", aha);
+    //delete printf("%u\n", aha);
 
     if((uvolni(aha, htable)) == INTERNA_CHYBA)
         return INTERNA_CHYBA;
