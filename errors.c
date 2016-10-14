@@ -6,30 +6,59 @@
 #include <stdio.h>
 
 
-int Errors(int error) {
+int printErrors(int error) {
     /* local variable definition */
-    char grade = 'B';
+    int  state = error;
 
-    switch(grade) {
-        case 'A' :
-            printf("Excellent!\n" );
+    switch(state) {
+        case 0 :
             break;
-        case 'B' :
-        case 'C' :
-            printf("Well done\n" );
+        case 1 :
+            printf("chyba v programu v rámci lexikální analýzy (chybná struktura aktuálního lexé-\n"
+                           "mu).\n" );
             break;
-        case 'D' :
-            printf("You passed\n" );
+        case 2 :
+            printf("chyba v programu v rámci syntaktické analýzy (chybná syntaxe programu).\n");
             break;
-        case 'F' :
-            printf("Better try again\n" );
+        case 3 :
+            printf("sémantická chyba v programu – nedefinovaná třída/funkce/proměnná, pokus o re-\n"
+                           "definici třídy/funkce/proměnné, atd.\n" );
+            break;
+        case 4 :
+            printf("sémantická chyba typové kompatibility v aritmetických, řetězcových a relačních\n"
+                           "výrazech, příp. špatný počet či typ parametrů u volání funkce.\n" );
+            break;
+        case 6 :
+            printf("ostatní sémantické chyby.\n" );
+            break;
+        case 7 :
+            printf("běhová chyba při načítání číselné hodnoty ze vstupu.\n");
+            break;
+        case 8 :
+            printf("běhová chyba při práci s neinicializovanou proměnnou.\n" );
+            break;
+        case 9 :
+            printf("běhová chyba dělení nulou.\n" );
+            break;
+        case 10 :
+            printf("ostatní běhové chyby.\n" );
+            break;
+        case 99 :
+            printf("interní chyba interpretu tj. neovlivněná vstupním programem (např. chyba a-\n"
+                           "lokace paměti, chyba při otvírání souboru s řídicím programem, špatné parametry\n"
+                           "příkazové řádky atd.).\n" );
             break;
         default :
-            printf("Invalid grade\n" );
+            printf("Unknown Error\n" );
     }
 
-    printf("Your grade is  %c\n", grade );
 
-    return 0;
+    return error;
 }
+
+/*  delete
+    int main () {
+    int error ;
+    return printErrors (error);
 }
+ */
