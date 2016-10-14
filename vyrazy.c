@@ -13,6 +13,7 @@ void main(){printf("ajajaaaj %d\n",ZLE);}
 
 /*
  * precedencna tabulka
+ *
 */
 
 const enumRovnost precTabulkaPreIf[POCET_VYRAZOV][POCET_VYRAZOV]={
