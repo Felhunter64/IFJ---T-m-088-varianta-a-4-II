@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 #include "memory.h"
+#include "errors.h"
 
 
 
@@ -48,13 +49,13 @@ tAddress* insertAddress(int addressNum, tTableOfAddress *htable){
         tmpAddress = tmpAddress->nextAddress;
 
     tmpAddress->nextAddress = newAddress;
-
+    printf("ok\n");
     return newAddress;
 }
 
 
 //odstrani tAdresu z hesovacej tabulky a vrati jej adresu
-tAddress* retrieveAddress(int addressNum, tTableOfAddress *htable){
+void* retrieveAddress(int addressNum, tTableOfAddress *htable){
     int hashKey = addressNum % htable->size;
 
     if(htable->arr[hashKey] == NULL){
@@ -95,4 +96,50 @@ void deleteHtable(tTableOfAddress *htable){
     }
 
     return;
+}
+
+//malokuje pamat o velkosti size a zaroven adresu prida dao hes tabulky,
+//v pripade neuspechu vrati hodnotu NULL
+void* malokuj(int size, tTableOfAddress *htable){
+    void* ptr;
+
+    if((ptr = malloc(sizeof(size))) == NULL)
+        return NULL;
+
+    if(insertAddress(ptr, htable) == NULL)
+        NULL;
+
+    return ptr;
+}
+
+
+int uvolni(void* ptr, tTableOfAddress *htable){
+    tAddress *address = retrieveAddress(ptr, htable);
+    if(address == NULL)
+        return INTERNA_CHYBA;
+
+    free(address);
+
+    return 0;
+}
+
+int main(){
+    tTableOfAddress* htable = createHtable(100);
+    char* aha;
+    aha = malokuj(4, htable);
+    if(aha == NULL)
+        return INTERNA_CHYBA;
+
+    uvolni(aha, htable);
+    aha = malokuj(4, htable);
+    if(aha == NULL)
+        return INTERNA_CHYBA;
+    aha = malokuj(4, htable);
+    if(aha == NULL)
+        return INTERNA_CHYBA;
+    aha = malokuj(4, htable);
+    if(aha == NULL)
+        return INTERNA_CHYBA;
+    deleteHtable(htable);
+
 }
