@@ -19,3 +19,4 @@
 
 
 #endif //IFJ_88_ERRORS_H
+
