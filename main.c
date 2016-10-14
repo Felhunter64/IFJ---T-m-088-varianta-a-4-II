@@ -7,9 +7,13 @@
 #include "memory.h"
 #include "errors.h"
 
-int main() {
+tTableOfAddress * htable;
+FILE *sourceFile;
 
-    tTableOfAddress * htable;
+int main(char **argv,int argc) {
+
+    if((sourceFile = fopen(argv, "r")) == NULL)
+        return printErrors(INTERNA_CHYBA);
 
     if((htable = createHtable(100)) == NULL)
         return printErrors(INTERNA_CHYBA);
