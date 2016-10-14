@@ -15,7 +15,7 @@ int lenght(char *string){
 }
 void merge_sort(char *string){
     int A=strlen(string);
-    int left=A/2;
+    int left=A/2;;
     int right=left;
     int x=0,y=0,z=0;
     int L=left,R=right;
