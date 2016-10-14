@@ -16,7 +16,8 @@
 #define RUN_INA_CHYBA 10
 #define INTERNA_CHYBA 99
 
-
+int printErrors(int error);
 
 #endif //IFJ_88_ERRORS_H
 
+/*koniec hlavickoveho suboru*/
