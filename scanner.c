@@ -18,8 +18,8 @@
 FILE *sourceFile;
 tTableOfAddress * htable;
 int main(int argc,char *argv[]){
-    if((sourceFile = fopen(*argv, "r")) == NULL)
-        return printErrors(INTERNA_CHYBA);
+    if((sourceFile = fopen(argv[1], "r")) == NULL)
+        return printErrors(13);
 
 
 
@@ -30,7 +30,7 @@ int main(int argc,char *argv[]){
 
 
 
-    xMalloc(sizeof(struct sToken),htable);
+
 
 getNextToken();
 
@@ -53,13 +53,12 @@ tToken getNextToken(){
     }*/
     while((c=getc(sourceFile)) != EOF){
 
-
         switch (state) {
             case START:
                 if (isspace(c)) {
                     state = START;
                 }
-                else if (c=="+"){
+                else if (c=='+'){
                     token->numToken=PLUS;
                     return token;
 
