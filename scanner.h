@@ -8,7 +8,7 @@
 typedef struct sToken {
     char *stringToken;
     int numToken;
-}tToken;
+}*tToken;
 
 typedef enum {
     KEY_BOOLEAN=10,
@@ -36,9 +36,9 @@ typedef enum{
 }ident;
 
 typedef enum{
-    PLUS = 30,               // +
-    MINUS,              // -
-    KRAT,               // *
+    PLUS = 30,          // + hotovo
+    MINUS,              // - hotovo
+    KRAT,               // * hotovo
     DELENO,             // /
     MENSITKO,           // <
     VACSITKO,           // >
@@ -46,12 +46,13 @@ typedef enum{
     VACSITKO_ROVNASA,   // >=
     ROVNASA,            // ==
     NEROVNASA,          // !=
-    LZATVORKA,          // (
-    PZATVORKA,          // )
+    LZATVORKA,          // ( hotovo
+    PZATVORKA,          // ) hotovo
     ROVNA_SA,           // =
-    PICNA_ZATVORKA_L,   // {
-    PICNA_ZATVORKA_R,   // }
+    PICNA_ZATVORKA_L,   // { hotovo
+    PICNA_ZATVORKA_R,   // } hotovo
     CIARKA              // ,
+    BODKO_CIARKA        // ; hotovo
 }operators;
 
 typedef enum{
@@ -61,10 +62,11 @@ typedef enum{
 }numbers;
 
 typedef enum{
-
+    START=80,
+    END,
 }states;
 
-int getNextToken();
+tToken getNextToken();
 
 
 #endif //IFJ_88_SCANNER_H
