@@ -1,7 +1,8 @@
 konvencie:
 
 1.  //delete nieco     -ak si to chcete ponechat, ale na konci to bude aj tak treba vymazat
-2.  /*vymazat*/        -to iste pre viac riadkove zakomentovanie
+2.  /*delete
+        nieco*/        -to iste pre viac riadkove zakomentovanie
 2.  //todo              -uzitocne
 3.  struktury oznacujte so zaciatocnym pismenom t alebo s: tAddress, sAdrress(pre struct Address)
 4.  funkcie: fooNieco
