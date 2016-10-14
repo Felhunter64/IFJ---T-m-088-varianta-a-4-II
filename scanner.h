@@ -51,7 +51,7 @@ typedef enum{
     ROVNA_SA,           // =
     PICNA_ZATVORKA_L,   // { hotovo
     PICNA_ZATVORKA_R,   // } hotovo
-    CIARKA              // ,
+    CIARKA,              // ,
     BODKO_CIARKA        // ; hotovo
 }operators;
 
