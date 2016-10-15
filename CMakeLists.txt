@@ -7,7 +7,7 @@ set(SOURCE_FILES main.c scanner.c scanner.h vyrazy.c vyrazy.h memory.c memory.h 
 add_executable(IFJ_88 ${SOURCE_FILES} main.c)
 add_executable(main main.c)
 add_executable(vyrazy vyrazy.c)
-add_executable(scanner scanner.c)
+add_executable(scanner scanner.c  memory.c errors.c)
 add_executable(memory memory.c)
 add_executable(errors errors.c)
 add_executable(helpingFun helpingFun.c)

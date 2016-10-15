@@ -7,7 +7,7 @@
 //todo prepisat enumVyrazy z knihovne vyrazy.h do anglictiny
 
 
-#define dlzka_tokenu=50
+#define dlzka_tokenu= 50
 
 
 #include "scanner.h"
@@ -46,54 +46,65 @@ getNextToken();
 
 tToken getNextToken(){
     int c;
-    int countChar=0;
+    int countChar=-1;
     int  state = START;
-    char *tmpStr=xMalloc(sizeof(char)*50,htable);
+
     tToken token = (tToken)xMalloc(sizeof(struct sToken),htable);
+    token->stringToken=xMalloc(sizeof(char)*50,htable);
     /*if (getc(sourceFile)==EOF){
         xFree(token,htable);
     }*/
     while((c=getc(sourceFile)) != EOF){
-
+            countChar++;
         switch (state) {
             case START:
                 if (isspace(c)) {
                     state = START;
                 }
                 else if (c=='+'){
+                    token->stringToken[countChar]=c;
                     token->numToken=PLUS;
+
                     return token;
 
                 }
-                else if (c=="-") {
+                else if (c=='-') {
+                    token->stringToken[countChar]=c;
                     token->numToken = MINUS;
                     return token;
                 }
-                else if (c=="*") {
+                else if (c=='*') {
+                    token->stringToken[countChar]=c;
                     token->numToken = KRAT;
                     return token;
                 }
-                else if (c=="(") {
+                else if (c=='(') {
+                    token->stringToken[countChar]=c;
                     token->numToken = LZATVORKA;
                     return token;
                 }
-                else if (c==")") {
+                else if (c==')') {
+                    token->stringToken[countChar]=c;
                     token->numToken = PZATVORKA;
                     return token;
                 }
-                else if (c=="{") {
+                else if (c=='{') {
+                    token->stringToken[countChar]=c;
                     token->numToken = PICNA_ZATVORKA_L;
                     return token;
                 }
-                else if (c=="}") {
+                else if (c=='}') {
+                    token->stringToken[countChar]=c;
                     token->numToken = PICNA_ZATVORKA_R;
                     return token;
                 }
-                else if (c==",") {
+                else if (c==',') {
+                    token->stringToken[countChar]=c;
                     token->numToken = CIARKA;
                     return token;
                 }
-                else if (c==";") {
+                else if (c==';') {
+                    token->stringToken[countChar]=c;
                     token->numToken = BODKO_CIARKA;
                     return token;
                 }
