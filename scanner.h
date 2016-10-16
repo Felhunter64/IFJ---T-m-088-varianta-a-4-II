@@ -51,8 +51,9 @@ typedef enum{
     ROVNA_SA,           // =
     PICNA_ZATVORKA_L,   // { hotovo
     PICNA_ZATVORKA_R,   // } hotovo
-    CIARKA,             // ,
+    CIARKA,             // , hotovo
     BODKO_CIARKA        // ; hotovo
+
 }operators;
 
 typedef enum{
@@ -64,6 +65,15 @@ typedef enum{
 typedef enum{
     START=80,
     END,
+    CMP,
+    LESS,
+    GREATHER,
+    NOT,
+    DIV_OR_COM,
+    IDENTIFY,
+    NUMBER,
+    MAYBE_STRING,
+
 }states;
 
 tToken getNextToken();

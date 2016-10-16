@@ -108,6 +108,40 @@ tToken getNextToken(){
                     token->numToken = BODKO_CIARKA;
                     return token;
                 }
+                else if (c=='=') {
+                    token->stringToken[countChar]=c;
+                    state=CMP;
+                }
+                else if (c=='<') {
+                    token->stringToken[countChar] = c;
+                    state = LESS;
+                }
+                else if (c=='>') {
+                    token->stringToken[countChar] = c;
+                    state = GREATHER;
+                }
+                else if (c=='!') {
+                    token->stringToken[countChar] = c;
+                    state = NOT;
+                }
+                else if (c=='/') {
+                    token->stringToken[countChar] = c;
+                    state = DIV_OR_COM;
+                }
+                else if( (isalpha(c)) || (c == '_') || (c == '$')) {
+                    token->stringToken[countChar] = c;
+                    state = IDENTIFY;
+                }
+                else if ((isdigit(c))) {
+                    token->stringToken[countChar] = c;
+                    state = NUMBER;
+                }
+                else if (c=='\"') {
+                    token->stringToken[countChar] = c;
+                    state = MAYBE_STRING;
+                }
                 break;
+            //case CMP :
+             //   if
         }
 }   }
