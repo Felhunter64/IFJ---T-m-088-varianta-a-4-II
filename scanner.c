@@ -167,7 +167,8 @@ tToken getNextToken(){
                     return token;
                 } else {
                     printErrors(LEX_CHYBA);
-                    // TODO garbage collector + exit value?
+                    // TODO garbage collector + exit value? -> pouzi xFree()
+                    // a zatial daj aj do exit parametru LEX_CHYBA
                     exit(1);
                 }
 

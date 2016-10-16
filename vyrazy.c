@@ -9,7 +9,7 @@
 #include "vyrazy.h"
 #include "memory.h"
 
-void main(){printf("ajajaaaj %d\n",ZLE);}
+void main(){printf("ajajaaaj %d\n",BAD);}
 
 /*
  * precedencna tabulka
@@ -18,21 +18,21 @@ void main(){printf("ajajaaaj %d\n",ZLE);}
 
 const enumRovnost precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
              //+  ,  -  ,  *  ,  /  ,  <  ,  >  ,  <= ,  >= ,  == ,  != ,  (  ,  )  ,  id ,  $  ,  \,
- /*  +  */   {VAC , VAC , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},
- /*  -  */   {VAC , VAC , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},
- /* \*  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},
- /*  /  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , VAC},
- /*  <  */   {MEN , MEN , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /*  >  */   {MEN , MEN , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /* <=  */   {MEN , MEN , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /* >=  */   {MEN , MEN , MEN , MEN , VAC , VAC , VAC , VAC , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /* ==  */   {MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /* !=  */   {MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , VAC , VAC , MEN , VAC , MEN , VAC , ZLE},
- /*  (  */   {MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , ROV , MEN , ZLE , ROV},
- /*  )  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , ZLE , VAC , ZLE , VAC , VAC},
- /* id  */   {VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , VAC , ZLE , VAC , ZLE , VAC , VAC},
- /*  $  */   {MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , MEN , ZLE , MEN , ZLE , ZLE},
- /*  ,  */   {MEN , MEN , MEN , MEN , ZLE , ZLE , ZLE , ZLE , ZLE , ZLE , MEN , ROV , MEN , ZLE , ROV},
+ /*  +  */   {GRE , GRE , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
+ /*  -  */   {GRE , GRE , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
+ /* \*  */   {GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
+ /*  /  */   {GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
+ /*  <  */   {LES , LES , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /*  >  */   {LES , LES , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /* <=  */   {LES , LES , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /* >=  */   {LES , LES , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /* ==  */   {LES , LES , LES , LES , LES , LES , LES , LES , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /* !=  */   {LES , LES , LES , LES , LES , LES , LES , LES , GRE , GRE , LES , GRE , LES , GRE , BAD},
+ /*  (  */   {LES , LES , LES , LES , LES , LES , LES , LES , LES , LES , LES , EQU , LES , BAD , EQU},
+ /*  )  */   {GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , BAD , GRE , BAD , GRE , GRE},
+ /* id  */   {GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , GRE , BAD , GRE , BAD , GRE , GRE},
+ /*  $  */   {LES , LES , LES , LES , LES , LES , LES , LES , LES , LES , LES , BAD , LES , BAD , BAD},
+ /*  ,  */   {LES , LES , LES , LES , BAD , BAD , BAD , BAD , BAD , BAD , LES , EQU , LES , BAD , EQU},
 };
 
 

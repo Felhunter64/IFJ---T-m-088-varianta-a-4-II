@@ -27,10 +27,10 @@ typedef enum{
 }enumVyrazy;
 
 typedef enum{
-    VAC,    // >
-    MEN,    // <
-    ROV,    // ==
-    ZLE     // syntakticka chyba
+    GRE,    // >
+    LES,    // <
+    EQU,    // ==
+    BAD     // syntakticka chyba
 }enumRovnost;
 
 typedef struct sToken {
