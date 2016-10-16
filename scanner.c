@@ -16,9 +16,11 @@
 #include "memory.h"
 #include "errors.h"
 #include <string.h>
+#include <stdlib.h>
 
 FILE *sourceFile;
 tTableOfAddress * htable;
+int temp=0;
 int main(int argc,char *argv[]){
     if((sourceFile = fopen(argv[1], "r")) == NULL)
         return printErrors(13);
@@ -34,10 +36,11 @@ int main(int argc,char *argv[]){
 
 
 
-getNextToken();
 
-
-
+//printf("%s\n",getNextToken()->stringToken);
+//printf("%d\n",getNextToken()->numToken);
+    getNextToken();
+    getNextToken();
 
 
     deleteHtable(htable);
@@ -46,102 +49,130 @@ getNextToken();
 
 tToken getNextToken(){
     int c;
-    int countChar=-1;
+    int countChar=0;
     int  state = START;
-
-    tToken token = (tToken)xMalloc(sizeof(struct sToken),htable);
+    tToken token = (tToken) xMalloc(sizeof(struct sToken), htable);
     token->stringToken=xMalloc(sizeof(char)*50,htable);
     /*if (getc(sourceFile)==EOF){
         xFree(token,htable);
     }*/
-    while((c=getc(sourceFile)) != EOF){
-            countChar++;
+    while((c=getc(sourceFile)) != EOF) {
+
         switch (state) {
             case START:
                 if (isspace(c)) {
                     state = START;
-                }
-                else if (c=='+'){
-                    token->stringToken[countChar]=c;
-                    token->numToken=PLUS;
+                } else if (c == '+') {
+                    token->stringToken[countChar] = c;
+                    token->numToken = PLUS;
 
                     return token;
 
-                }
-                else if (c=='-') {
-                    token->stringToken[countChar]=c;
+                } else if (c == '-') {
+                    token->stringToken[countChar] = c;
                     token->numToken = MINUS;
                     return token;
-                }
-                else if (c=='*') {
-                    token->stringToken[countChar]=c;
+                } else if (c == '*') {
+                    token->stringToken[countChar] = c;
                     token->numToken = KRAT;
                     return token;
-                }
-                else if (c=='(') {
-                    token->stringToken[countChar]=c;
+                } else if (c == '(') {
+                    token->stringToken[countChar] = c;
                     token->numToken = LZATVORKA;
                     return token;
-                }
-                else if (c==')') {
-                    token->stringToken[countChar]=c;
+                } else if (c == ')') {
+                    token->stringToken[countChar] = c;
                     token->numToken = PZATVORKA;
                     return token;
-                }
-                else if (c=='{') {
-                    token->stringToken[countChar]=c;
+                } else if (c == '{') {
+                    token->stringToken[countChar] = c;
                     token->numToken = PICNA_ZATVORKA_L;
                     return token;
-                }
-                else if (c=='}') {
-                    token->stringToken[countChar]=c;
+                } else if (c == '}') {
+                    token->stringToken[countChar] = c;
                     token->numToken = PICNA_ZATVORKA_R;
                     return token;
-                }
-                else if (c==',') {
-                    token->stringToken[countChar]=c;
+                } else if (c == ',') {
+                    token->stringToken[countChar] = c;
                     token->numToken = CIARKA;
                     return token;
-                }
-                else if (c==';') {
-                    token->stringToken[countChar]=c;
+                } else if (c == ';') {
+                    token->stringToken[countChar] = c;
                     token->numToken = BODKO_CIARKA;
                     return token;
-                }
-                else if (c=='=') {
-                    token->stringToken[countChar]=c;
-                    state=CMP;
-                }
-                else if (c=='<') {
+                } else if (c == '=') {
+                    token->stringToken[countChar] = c;
+                    state = CMP;
+                } else if (c == '<') {
                     token->stringToken[countChar] = c;
                     state = LESS;
-                }
-                else if (c=='>') {
+                } else if (c == '>') {
                     token->stringToken[countChar] = c;
                     state = GREATHER;
-                }
-                else if (c=='!') {
+                } else if (c == '!') {
                     token->stringToken[countChar] = c;
                     state = NOT;
-                }
-                else if (c=='/') {
+                } else if (c == '/') {
                     token->stringToken[countChar] = c;
                     state = DIV_OR_COM;
-                }
-                else if( (isalpha(c)) || (c == '_') || (c == '$')) {
+                } else if ((isalpha(c)) || (c == '_') || (c == '$')) {
                     token->stringToken[countChar] = c;
                     state = IDENTIFY;
-                }
-                else if ((isdigit(c))) {
+                } else if ((isdigit(c))) {
                     token->stringToken[countChar] = c;
                     state = NUMBER;
-                }
-                else if (c=='\"') {
+                } else if (c == '\"') {
                     token->stringToken[countChar] = c;
                     state = MAYBE_STRING;
                 }
                 break;
-            //case CMP :
-             //   if
+            case CMP :
+                if (c == '=') {
+                    countChar++;
+                    token->stringToken[countChar] = c;
+                    token->numToken = ROVNASA2;
+                    return token;
+                } else {
+                    ungetc(c, sourceFile);
+                    token->numToken = ROVNA_SA;
+                    return token;
+                }
+            case LESS :
+                if (c == '=') {
+                    countChar++;
+                    token->stringToken[countChar] = c;
+                    token->numToken = MENSITKO_ROVNASA;
+                    return token;
+                } else {
+                    ungetc(c, sourceFile);
+                    token->numToken = MENSITKO;
+                    return token;
+                }
+            case GREATHER :
+                if (c == '=') {
+                    countChar++;
+                    token->stringToken[countChar] = c;
+                    token->numToken = VACSITKO_ROVNASA;
+                    return token;
+                } else {
+                    ungetc(c, sourceFile);
+                    token->numToken = VACSITKO;
+                    return token;
+                }
+            case NOT :
+                if (c == '=') {
+                    countChar++;
+                    token->stringToken[countChar] = c;
+                    token->numToken = NEROVNASA;
+                    return token;
+                } else {
+                    printErrors(LEX_CHYBA);
+                    // TODO garbage collector + exit value?
+                    exit(1);
+                }
+
         }
-}   }
+    }
+
+
+}
