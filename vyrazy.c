@@ -8,8 +8,10 @@
 
 #include "vyrazy.h"
 #include "memory.h"
+#include "scanner.h"
+#include "errors.h"
 
-void main(){printf("ajajaaaj %d\n",BAD);}
+//void main(){printf("ajajaaaj %d\n",BAD);}
 
 /*
  * precedencna tabulka
@@ -35,6 +37,9 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
  /*  ,  */   {LES , LES , LES , LES , BAD , BAD , BAD , BAD , BAD , BAD , LES , EQU , LES , BAD , EQU},
 };
 
+void processExp(){
+    getNextToken();
+}
 
 
 
