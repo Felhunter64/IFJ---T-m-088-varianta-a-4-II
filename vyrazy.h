@@ -53,6 +53,7 @@ typedef enum{
     RULE_EQUAL,              // x == y
     RULE_NOT_EQUAL,          // x != y
     RULE_BRACKETS,           // (x)
+    RULE_FUNC_PARAM,         // napr. parameter x foo(x, y)
     RULE_END                 // koniec
 }expressionRules;
 

@@ -5,19 +5,23 @@
 //todo ked dostanem EOF tak freeujem string ....
 //todo namallocovanie stringu
 //todo prepisat enumVyrazy z knihovne vyrazy.h do anglictiny
+//todo premenna s lavou zatvorkou
 
 
 #define dlzka_tokenu= 50
 
 
-#include "scanner.h"
+#include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <stdbool.h>
+
+#include "scanner.h"
 #include "memory.h"
 #include "errors.h"
 #include "vyrazy.h"
-#include <string.h>
-#include <stdlib.h>
+
 
 
 FILE *sourceFile;
@@ -27,7 +31,6 @@ int main(int argc,char *argv[]){
     if((sourceFile = fopen("testovaci_subor2.txt", "r")) == NULL)
     //if((sourceFile = fopen(argv[1], "r")) == NULL)
         return printErrors(13);
-
 
 
 

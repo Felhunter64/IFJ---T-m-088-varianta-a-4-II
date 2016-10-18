@@ -3,6 +3,7 @@
 //
 
 // TODO ked dostanes v tokene END tak uvolnis strukturu (token)
+// todo zistit foo medzera ()   ci je paltne?
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -37,11 +38,19 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
  /*  ,  */   {LES , LES , LES , LES , BAD , BAD , BAD , BAD , BAD , BAD , LES , EQU , LES , BAD , EQU},
 };
 
+
+//todo sendId(), sendRule(), counter, stack(push, pop, create)
+
+exCreateStack(){
+
+}
+
 int processExp(){
     tToken x;
     while((x = getNextToken()) && x->numToken!= END){
 
         printf("%d : %s\n", x->numToken, x->stringToken);
+
 
     }
 
