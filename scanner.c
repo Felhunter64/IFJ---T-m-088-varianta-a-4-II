@@ -38,7 +38,6 @@ int main(int argc,char *argv[]){
 
 
     processExp();
-    processExp();
 
 
 //printf("%s\n",getNextToken()->stringToken);
@@ -157,6 +156,7 @@ tToken getNextToken(){
                     token->numToken = ASSIGN;
                     return token;
                 }
+                break;
             case LESS_STATE :
                 if (c == '=') {
                     countChar++;
@@ -169,6 +169,7 @@ tToken getNextToken(){
                     token->numToken = LESS;
                     return token;
                 }
+                break;
             case GREATER_STATE :
                 if (c == '=') {
                     countChar++;
@@ -181,6 +182,7 @@ tToken getNextToken(){
                     token->numToken = GREATER;
                     return token;
                 }
+                break;
             case NOT :
                 if (c == '=') {
                     countChar++;
@@ -194,31 +196,32 @@ tToken getNextToken(){
                     xFree(token->stringToken,htable);
                     exit(LEX_CHYBA);
                 }
+                break;
             case DIV_OR_COM :
-                if (c!= '/' && c!= '*') {
-                    ungetc(c, sourceFile);
-                    token->numToken = DIVINE;
-                    return token;
-                } else if (c=='/') state=LINE_COMMENT;
-                  else if (c=='*') state=END_COMMENT;
-
+               if (c!='*' && c!= '/'){
+                   ungetc(c,sourceFile);
+                   token->numToken=DIVINE;
+                   return token;
+               } else if (c== '*') state=MULTI_LINE_COMMENT;
+                 else if (c== '/') state=LINE_COMMENT;
+                break;
             case LINE_COMMENT :
                 while(c != '\n' && c!= EOF ){
                     c=getc(sourceFile);
                 } if (c==EOF) state=END;
                   else state = START;
+                break;
+            case MULTI_LINE_COMMENT :
+                while(c != '*' && c!= EOF ) {
+                    c = getc(sourceFile);
+                } if (c==EOF) state=END;
+                  else state =END_COMMENT;
+                break;
+            case END_COMMENT :
+                if (c == '/') state = START;
+                else state=MULTI_LINE_COMMENT;
+            break;
 
-
-
-               /* } else if (c == '*') {
-                    c=getc(sourceFile);
-                    while(c != '*' && c!= EOF ) {
-                        c = getc(sourceFile);
-                    } if (c==EOF) state=END;
-                      else state =
-
-                }
-                */
 
 
         }

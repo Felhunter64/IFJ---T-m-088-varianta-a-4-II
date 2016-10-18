@@ -75,6 +75,7 @@ typedef enum{
     MAYBE_STRING,
     LINE_COMMENT,
     END_COMMENT,
+    MULTI_LINE_COMMENT,
 
 }states;
 
