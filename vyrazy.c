@@ -38,7 +38,8 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
 };
 
 void processExp(){
-    getNextToken();
+    tToken x = getNextToken();
+    printf("%d : %s\n", x->numToken, x->stringToken);
 }
 
 
