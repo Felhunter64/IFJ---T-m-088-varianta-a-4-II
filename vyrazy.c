@@ -42,6 +42,7 @@ int processExp(){
     while((x = getNextToken()) && x->numToken!= END){
 
         printf("%d : %s\n", x->numToken, x->stringToken);
+
     }
 
    return 0;
