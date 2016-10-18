@@ -74,6 +74,10 @@ typedef enum{
     NUMBER,
     MAYBE_STRING,
     LINE_COMMENT,
+    END_COMMENT,
+    MULTI_LINE_COMMENT,
+    EXPONENT,
+    DEC,
 
 }states;
 
