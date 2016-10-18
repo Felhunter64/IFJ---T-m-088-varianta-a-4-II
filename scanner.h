@@ -78,6 +78,8 @@ typedef enum{
     MULTI_LINE_COMMENT,
     EXPONENT,
     DEC,
+    DOUB,
+    EXP,
 
 }states;
 
