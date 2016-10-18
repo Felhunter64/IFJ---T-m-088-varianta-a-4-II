@@ -7,7 +7,7 @@
 
 #define POCET_VYRAZOV 15
 
-
+/*
 typedef enum{
     PLUS,              // +
     MINUS,             // -
@@ -25,6 +25,7 @@ typedef enum{
     END,               // koniec
     COMMA              // ,
 }enumExpressions;
+ */
 
 typedef enum{
     GRE,    // >
@@ -41,23 +42,20 @@ typedef enum{
     RULE_FUNC,      // zacina pouzitie nejakej funkcie - foo()
     RULE_VAR,       // pouzitie premennej
 
-    RULE_PLUS,               // +
-    RULE_MINUS,              // -
-    RULE_MULTIPLY,           // *
-    RULE_DIVIDE,             // /
-    RULE_LESS,               // <
-    RULE_GREATER,            // >
-    RULE_LESS_EQUAL,         // <=
-    RULE_GREATER_EQUAL,      // >=
-    RULE_EQUAL,              // ==
-    RULE_NOT_EQUAL,          // !=
+    RULE_PLUS,               // x + y
+    RULE_MINUS,              // x - y
+    RULE_MULTIPLY,           // x * y
+    RULE_DIVIDE,             // x / y
+    RULE_LESS,               // x < y
+    RULE_GREATER,            // x > y
+    RULE_LESS_EQUAL,         // x <= y
+    RULE_GREATER_EQUAL,      // x >= y
+    RULE_EQUAL,              // x == y
+    RULE_NOT_EQUAL,          // x != y
+    RULE_BRACKETS,           // (x)
     RULE_END                 // koniec
 }expressionRules;
 
-typedef struct sToken {
-    char *stringToken;
-    int numToken;
-}tToken;
 
 void spustiVyrazy();
 

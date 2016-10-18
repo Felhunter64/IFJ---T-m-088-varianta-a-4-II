@@ -22,7 +22,8 @@ FILE *sourceFile;
 tTableOfAddress * htable;
 int temp=0;
 int main(int argc,char *argv[]){
-    if((sourceFile = fopen(argv[1], "r")) == NULL)
+    if((sourceFile = fopen("testovaci_subor2.txt", "r")) == NULL)
+    //if((sourceFile = fopen(argv[1], "r")) == NULL)
         return printErrors(13);
 
 
