@@ -16,7 +16,7 @@ void main(){printf("ajajaaaj %d\n",BAD);}
  *
 */
 
-const enumRovnost precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
+const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
              //+  ,  -  ,  *  ,  /  ,  <  ,  >  ,  <= ,  >= ,  == ,  != ,  (  ,  )  ,  id ,  $  ,  \,
  /*  +  */   {GRE , GRE , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
  /*  -  */   {GRE , GRE , LES , LES , GRE , GRE , GRE , GRE , GRE , GRE , LES , GRE , LES , GRE , GRE},
