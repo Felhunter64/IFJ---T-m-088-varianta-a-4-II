@@ -54,7 +54,7 @@ tToken getNextToken(){
     int  state = START;
     tToken token = (tToken) xMalloc(sizeof(struct sToken), htable);
     token->stringToken=xMalloc(sizeof(char)*50,htable);
-    token->stringToken = 'fdsfsdfsdf';
+    strcpy(token->stringToken, "ahoj sulo");
     token->numToken = 5 ;
     return 5;
     /*if (getc(sourceFile)==EOF){
