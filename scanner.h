@@ -73,6 +73,7 @@ typedef enum{
     IDENTIFY,
     NUMBER,
     MAYBE_STRING,
+    LINE_COMMENT,
 
 }states;
 
