@@ -15,9 +15,10 @@
 #include <stdio.h>
 #include "memory.h"
 #include "errors.h"
+#include "vyrazy.h"
 #include <string.h>
 #include <stdlib.h>
-#include <vyrazy.h>
+
 
 FILE *sourceFile;
 tTableOfAddress * htable;
