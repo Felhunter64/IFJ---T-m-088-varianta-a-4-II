@@ -38,6 +38,7 @@ int main(int argc,char *argv[]){
 
 
     processExp();
+    processExp();
 
 
 //printf("%s\n",getNextToken()->stringToken);
@@ -55,9 +56,7 @@ tToken getNextToken(){
     int countChar=0;
     int  state = START;
     tToken token = (tToken) xMalloc(sizeof(struct sToken), htable);
-    token->stringToken=xMalloc(sizeof(char)*50,htable);strcpy(token->stringToken, "ahoj sulo");
-    token->numToken = 5 ;
-    printf("%d \n %s \n",token->numToken, token->stringToken);
+    token->stringToken=xMalloc(sizeof(char)*50,htable);
     /*if (getc(sourceFile)==EOF){
         xFree(token,htable);
     }*/
@@ -69,6 +68,7 @@ tToken getNextToken(){
                     state = START;
                 } else if (c == '+') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = PLUS;
 
                     return token;
@@ -81,34 +81,42 @@ tToken getNextToken(){
 
                 } else if (c == '-') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = MINUS;
                     return token;
                 } else if (c == '*') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = MULTIPLY;
                     return token;
                 } else if (c == '(') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = L_BRACKET;
                     return token;
                 } else if (c == ')') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = R_BRACKET;
                     return token;
                 } else if (c == '{') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = L_PI_BRACKET;
                     return token;
                 } else if (c == '}') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = R_PI_BRACKET;
                     return token;
                 } else if (c == ',') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = COMMA;
                     return token;
                 } else if (c == ';') {
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = DOT_COMMA;
                     return token;
                 } else if (c == '=') {
@@ -141,6 +149,7 @@ tToken getNextToken(){
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = EQUAL;
                     return token;
                 } else {
@@ -152,6 +161,7 @@ tToken getNextToken(){
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = LESS_EQUAL;
                     return token;
                 } else {
@@ -163,6 +173,7 @@ tToken getNextToken(){
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = GREATER_EQUAL;
                     return token;
                 } else {
@@ -174,28 +185,40 @@ tToken getNextToken(){
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
+                    token->stringToken[++countChar] = '\0';
                     token->numToken = NOT_EQUAL;
                     return token;
                 } else {
                     printErrors(LEX_CHYBA);
-                    // TODO garbage collector + exit value? -> deleteHtable(htable);
-                    // a zatial daj aj do exit parametru LEX_CHYBA
+                    xFree(token,htable);
+                    xFree(token->stringToken,htable);
                     exit(LEX_CHYBA);
                 }
-            case DIV_OR_COM : if (c!= '/' && c!= '*'){
-                    ungetc(c,sourceFile);
-                    token->numToken=DIVINE;
+            case DIV_OR_COM :
+                if (c!= '/' && c!= '*') {
+                    ungetc(c, sourceFile);
+                    token->numToken = DIVINE;
                     return token;
-                }
-                else if (c == '/') {
+                } else if (c=='/') state=LINE_COMMENT;
+                  else if (c=='*') state=END_COMMENT;
+
+            case LINE_COMMENT :
+                while(c != '\n' && c!= EOF ){
                     c=getc(sourceFile);
-                    while(c != '\n' && c!= EOF ){
-                        c=getc(sourceFile);
-                    }
-                    if (c==EOF) state=END;
-                    else state = START;
+                } if (c==EOF) state=END;
+                  else state = START;
+
+
+
+               /* } else if (c == '*') {
+                    c=getc(sourceFile);
+                    while(c != '*' && c!= EOF ) {
+                        c = getc(sourceFile);
+                    } if (c==EOF) state=END;
+                      else state =
 
                 }
+                */
 
 
         }
