@@ -225,7 +225,7 @@ tToken getNextToken(){
                     countChar++;
                     //todo remaloc ak je viac ako 50 countchar
                     token->stringToken[countChar] = c;
-                } if (isdigit(c)==NULL && c!= 'e' && c!= 'E' && c!='.'){
+                } if (isdigit(c)==0 && c!= 'e' && c!= 'E' && c!='.'){
                     token->numToken=INTEGER;
                     token->stringToken[++countChar] = '\0';
                     return token;
@@ -237,7 +237,7 @@ tToken getNextToken(){
                 }
                 break;
             case DEC :
-                if (isdigit(c)==NULL){
+                if (isdigit(c)==0){
                     printErrors(LEX_CHYBA);
                     xFree(token,htable);
                     xFree(token->stringToken,htable);
@@ -254,14 +254,32 @@ tToken getNextToken(){
                     //todo remaloc ak je viac ako 50 countchar
                     token->stringToken[countChar] = c;
                 }
-                if  (isdigit(c)==NULL && c!= 'e' && c!= 'E'){
+                if  (isdigit(c)==0 && c!= 'e' && c!= 'E'){
                     token->numToken=DOUBLE;
                     token->stringToken[++countChar] = '\0';
                     return token;
                 } else if (c== 'e' || c== 'E') state =  EXPONENT;
                 break;
             case EXPONENT :
-
+                if (c=='+' || c== '-') state=EXP;
+                if (isdigit(c)) state = DOUB;
+                if (isdigit(c)== 0){
+                    printErrors(LEX_CHYBA);
+                    xFree(token,htable);
+                    xFree(token->stringToken,htable);
+                    exit(LEX_CHYBA);
+                }
+            break;
+            case DOUB:
+                while(isdigit(c)) {
+                    c = getc(sourceFile);
+                    countChar++;
+                    //todo remaloc ak je viac ako 50 countchar
+                    token->stringToken[countChar] = c;
+                }
+                token->numToken= DOUBLE;
+                token->stringToken[++countChar] = '\0';
+                return token;
 
 
 
