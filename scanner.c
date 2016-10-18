@@ -56,8 +56,8 @@ tToken getNextToken(){
     /*if (getc(sourceFile)==EOF){
         xFree(token,htable);
     }*/
-    while((c=getc(sourceFile)) != EOF) {
-
+    while(1) {
+        c=getc(sourceFile);
         switch (state) {
             case START:
                 if (isspace(c)) {
@@ -169,7 +169,21 @@ tToken getNextToken(){
                     printErrors(LEX_CHYBA);
                     // TODO garbage collector + exit value? -> deleteHtable(htable);
                     // a zatial daj aj do exit parametru LEX_CHYBA
-                    exit(1);
+                    exit(LEX_CHYBA);
+                }
+            case DIV_OR_COM : if (c!= '/' && c!= '*'){
+                    ungetc(c,sourceFile);
+                    token->numToken=DELENO;
+                    return token;
+                }
+                else if (c == '/') {
+                    c=getc(sourceFile);
+                    while(c != '\n' && c!= EOF ){
+                        c=getc(sourceFile);
+                    }
+                    if (c==EOF) state=END;
+                    else state = START;
+
                 }
 
         }
