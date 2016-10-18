@@ -58,5 +58,6 @@ typedef enum{
 
 
 void spustiVyrazy();
+void processExp();
 
 #endif //IFJ_88_VYRAZY_H

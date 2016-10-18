@@ -17,6 +17,7 @@
 #include "errors.h"
 #include <string.h>
 #include <stdlib.h>
+#include <vyrazy.h>
 
 FILE *sourceFile;
 tTableOfAddress * htable;
@@ -35,7 +36,7 @@ int main(int argc,char *argv[]){
 
 
 
-
+    processExp();
 
 
 //printf("%s\n",getNextToken()->stringToken);
