@@ -37,10 +37,19 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
  /*  ,  */   {LES , LES , LES , LES , BAD , BAD , BAD , BAD , BAD , BAD , LES , EQU , LES , BAD , EQU},
 };
 
-void processExp(){
-    tToken x = getNextToken();
-    printf("%d : %s\n", x->numToken, x->stringToken);
+int processExp(){
+    tToken x;
+    while((x = getNextToken()) && x->numToken!= END){
+
+        printf("%d : %s\n", x->numToken, x->stringToken);
+    }
+
+   return 0;
+
+
 }
+
+
 
 
 
