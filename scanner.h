@@ -38,21 +38,21 @@ typedef enum{
 typedef enum{
     PLUS = 30,          // + hotovo
     MINUS,              // - hotovo
-    KRAT,               // * hotovo
-    DELENO,             // /
-    MENSITKO,           // <
-    VACSITKO,           // >
-    MENSITKO_ROVNASA,   // <=
-    VACSITKO_ROVNASA,   // >=
-    ROVNASA2,           // ==
-    NEROVNASA,          // !=
-    LZATVORKA,          // ( hotovo
-    PZATVORKA,          // ) hotovo
-    ROVNA_SA,           // =
-    PICNA_ZATVORKA_L,   // { hotovo
-    PICNA_ZATVORKA_R,   // } hotovo
-    CIARKA,             // , hotovo
-    BODKO_CIARKA        // ; hotovo
+    MULTIPLY,               // * hotovo
+    DIVINE,             // /
+    LESS,           // <
+    GREATER,           // >
+    LESS_EQUAL,   // <=
+    GREATER_EQUAL,   // >=
+    EQUAL,           // ==
+    NOT_EQUAL,          // !=
+    L_BRACKET,          // ( hotovo
+    R_BRACKET,          // ) hotovo
+    ASSIGN,           // =
+    L_PI_BRACKET,   // { hotovo
+    R_PI_BRACKET,   // } hotovo
+    COMMA,             // , hotovo
+    DOT_COMMA        // ; hotovo
 
 }operators;
 
@@ -66,8 +66,8 @@ typedef enum{
     START=80,
     END,
     CMP,
-    LESS,
-    GREATHER,
+    LESS_STATE,
+    GREATER_STATE,
     NOT,
     DIV_OR_COM,
     IDENTIFY,

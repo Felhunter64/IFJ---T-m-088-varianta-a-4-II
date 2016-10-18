@@ -39,7 +39,7 @@ int main(int argc,char *argv[]){
 
 //printf("%s\n",getNextToken()->stringToken);
 //printf("%d\n",getNextToken()->numToken);
-    getNextToken();
+  getNextToken();
     getNextToken();
 
 
@@ -53,6 +53,9 @@ tToken getNextToken(){
     int  state = START;
     tToken token = (tToken) xMalloc(sizeof(struct sToken), htable);
     token->stringToken=xMalloc(sizeof(char)*50,htable);
+    token->stringToken = 'fdsfsdfsdf';
+    token->numToken = 5 ;
+    return 5;
     /*if (getc(sourceFile)==EOF){
         xFree(token,htable);
     }*/
@@ -68,47 +71,53 @@ tToken getNextToken(){
 
                     return token;
 
+                } else if (c == EOF) {
+
+                    token->numToken = END;
+
+                    return token;
+
                 } else if (c == '-') {
                     token->stringToken[countChar] = c;
                     token->numToken = MINUS;
                     return token;
                 } else if (c == '*') {
                     token->stringToken[countChar] = c;
-                    token->numToken = KRAT;
+                    token->numToken = MULTIPLY;
                     return token;
                 } else if (c == '(') {
                     token->stringToken[countChar] = c;
-                    token->numToken = LZATVORKA;
+                    token->numToken = L_BRACKET;
                     return token;
                 } else if (c == ')') {
                     token->stringToken[countChar] = c;
-                    token->numToken = PZATVORKA;
+                    token->numToken = R_BRACKET;
                     return token;
                 } else if (c == '{') {
                     token->stringToken[countChar] = c;
-                    token->numToken = PICNA_ZATVORKA_L;
+                    token->numToken = L_PI_BRACKET;
                     return token;
                 } else if (c == '}') {
                     token->stringToken[countChar] = c;
-                    token->numToken = PICNA_ZATVORKA_R;
+                    token->numToken = R_PI_BRACKET;
                     return token;
                 } else if (c == ',') {
                     token->stringToken[countChar] = c;
-                    token->numToken = CIARKA;
+                    token->numToken = COMMA;
                     return token;
                 } else if (c == ';') {
                     token->stringToken[countChar] = c;
-                    token->numToken = BODKO_CIARKA;
+                    token->numToken = DOT_COMMA;
                     return token;
                 } else if (c == '=') {
                     token->stringToken[countChar] = c;
                     state = CMP;
                 } else if (c == '<') {
                     token->stringToken[countChar] = c;
-                    state = LESS;
+                    state = LESS_STATE;
                 } else if (c == '>') {
                     token->stringToken[countChar] = c;
-                    state = GREATHER;
+                    state = GREATER_STATE;
                 } else if (c == '!') {
                     token->stringToken[countChar] = c;
                     state = NOT;
@@ -130,40 +139,40 @@ tToken getNextToken(){
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
-                    token->numToken = ROVNASA2;
+                    token->numToken = EQUAL;
                     return token;
                 } else {
                     ungetc(c, sourceFile);
-                    token->numToken = ROVNA_SA;
+                    token->numToken = ASSIGN;
                     return token;
                 }
-            case LESS :
+            case LESS_STATE :
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
-                    token->numToken = MENSITKO_ROVNASA;
+                    token->numToken = LESS_EQUAL;
                     return token;
                 } else {
                     ungetc(c, sourceFile);
-                    token->numToken = MENSITKO;
+                    token->numToken = LESS;
                     return token;
                 }
-            case GREATHER :
+            case GREATER_STATE :
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
-                    token->numToken = VACSITKO_ROVNASA;
+                    token->numToken = GREATER_EQUAL;
                     return token;
                 } else {
                     ungetc(c, sourceFile);
-                    token->numToken = VACSITKO;
+                    token->numToken = GREATER;
                     return token;
                 }
             case NOT :
                 if (c == '=') {
                     countChar++;
                     token->stringToken[countChar] = c;
-                    token->numToken = NEROVNASA;
+                    token->numToken = NOT_EQUAL;
                     return token;
                 } else {
                     printErrors(LEX_CHYBA);
@@ -173,7 +182,7 @@ tToken getNextToken(){
                 }
             case DIV_OR_COM : if (c!= '/' && c!= '*'){
                     ungetc(c,sourceFile);
-                    token->numToken=DELENO;
+                    token->numToken=DIVINE;
                     return token;
                 }
                 else if (c == '/') {
@@ -185,6 +194,7 @@ tToken getNextToken(){
                     else state = START;
 
                 }
+
 
         }
     }

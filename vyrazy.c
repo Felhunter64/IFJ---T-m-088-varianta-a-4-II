@@ -2,7 +2,7 @@
 // Created by chronos on 10/11/16.
 //
 
-
+// TODO ked dostanes v tokene END tak uvolnis strukturu (token)
 #include <stdlib.h>
 #include <stdio.h>
 
