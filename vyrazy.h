@@ -53,12 +53,23 @@ typedef enum{
     RULE_EQUAL,              // x == y
     RULE_NOT_EQUAL,          // x != y
     RULE_BRACKETS,           // (x)
-    RULE_FUNC_PARAM,         // napr. parameter x foo(x, y)
+    RULE_FUNC_PARAM,         // napr. parameter x foo(x, y)?
+    RULE_RULE,               // hocico premenene na pravidlo
     RULE_END                 // koniec
 }expressionRules;
 
+typedef struct sStackUnit{
+    int position;
+    expressionRules rule;
+    struct sStackUnit *next;
+}*tStackUnit;
 
-void spustiVyrazy();
+typedef struct sStackStart{
+    struct sStackUnit *first;
+    struct sStackUnit *top;
+}*tStackStart;
+
+
 int processExp();
 
 #endif //IFJ_88_VYRAZY_H

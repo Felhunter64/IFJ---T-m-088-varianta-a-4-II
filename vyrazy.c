@@ -12,6 +12,8 @@
 #include "scanner.h"
 #include "errors.h"
 
+extern htable;
+
 //void main(){printf("ajajaaaj %d\n",BAD);}
 
 /*
@@ -41,8 +43,11 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
 
 //todo sendId(), sendRule(), counter, stack(push, pop, create)
 
-exCreateStack(){
 
+
+tStackStart exCreateStack(){
+    tStackStart x;
+    xMalloc(sizeof(struct sStackUnit, htable));
 }
 
 int processExp(){
@@ -50,6 +55,7 @@ int processExp(){
     while((x = getNextToken()) && x->numToken!= END){
 
         printf("%d : %s\n", x->numToken, x->stringToken);
+
 
 
     }

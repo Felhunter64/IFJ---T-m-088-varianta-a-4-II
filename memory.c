@@ -111,15 +111,19 @@ void deleteHtable(tTableOfAddress *htable){
 }
 
 //malokuje pamat o velkosti size a zaroven adresu prida dao hes tabulky,
-//v pripade neuspechu vrati hodnotu NULL
-void* xMalloc(int size, tTableOfAddress *htable){
-    void* ptr;
+//v pripade neuspechu ukonci program s navratovou hodnotou INTERNA_CHYBA
+void* xMalloc(int size, tTableOfAddress *htable) {
+    void *ptr;
 
-    if((ptr = malloc(sizeof(size))) == NULL)
-        return NULL;
+    if ((ptr = malloc(size)) == NULL){
+        deleteHtable(htable);
+        exit(INTERNA_CHYBA);
+    }
     //delete printf("%u\n", ptr);
-    if(insertAddress(ptr, htable) == NULL)
-        NULL;
+    if (insertAddress(ptr, htable) == NULL){
+        deleteHtable(htable);
+        exit(INTERNA_CHYBA);
+    }
 
     return ptr;
 }
@@ -128,8 +132,10 @@ void* xMalloc(int size, tTableOfAddress *htable){
 int xFree(void* ptr, tTableOfAddress *htable){
     void *address = retrieveAddress(ptr, htable);
     //delete printf("free %u\n", address);
-    if(address == NULL)
-        return INTERNA_CHYBA;
+    if(address == NULL) {
+        deleteHtable(htable);
+        exit(INTERNA_CHYBA);
+    }
 
     //delete printf("super%u\n", address);
     free(address);
