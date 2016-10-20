@@ -3,11 +3,11 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/memory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/vyrazy.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/expression.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/scanner.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/errors.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/vyrazy.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/expression.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/helpingFun.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/memory.c" isTestSource="false" />

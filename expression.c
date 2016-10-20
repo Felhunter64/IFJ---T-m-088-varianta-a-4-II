@@ -7,12 +7,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "vyrazy.h"
+#include "expression.h"
 #include "memory.h"
 #include "scanner.h"
 #include "errors.h"
 
-extern htable;
 
 //void main(){printf("ajajaaaj %d\n",BAD);}
 
@@ -43,26 +42,56 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
 
 //todo sendId(), sendRule(), counter, stack(push, pop, create)
 
-
-
 tStackStart exCreateStack(){
-    tStackStart x;
-    xMalloc(sizeof(struct sStackUnit, htable));
+    tStackStart stack;
+    stack = xMalloc(sizeof(struct sStackUnit), htable);
+
+    stack->last = xMalloc(sizeof(struct sStackUnit), htable);
+    stack->top = stack->last;
+
+    stack->last->rule = RULE_END;
+    stack->last->position = 0;
+    stack->last->prev = NULL;
+
+    return stack;
+}
+
+//todo premenit id na pravidlo
+void addToStackIdRule(tStackStart stack, int position){
+    tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
+
+    unitStack->prev = stack->last;
+    unitStack->position = position;
+    unitStack->rule = RULE_RULE;
+    stack->last = unitStack;
+}
+
+//todo pridat prvok ktory nie je pravidlo na zaciatku(nie je id)
+void addToStackTopUnit(tStackStart stack, expressionRules rule, int position){
+    tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
+
+    unitStack->prev = stack->last;
+    unitStack->position = position;
+    unitStack->rule = rule;
+    stack->last = unitStack;
 }
 
 int processExp(){
-    tToken x;
-    while((x = getNextToken()) && x->numToken!= END){
+    tToken token;
+    tStackStart stack = exCreateStack();
 
-        printf("%d : %s\n", x->numToken, x->stringToken);
+    while((token = getNextToken()) && token->numToken!= END){
+
+        printf("%d : %s\n", token->numToken, token->stringToken);
 
 
 
     }
 
-   return 0;
 
+    xFree(stack, htable);
 
+    return 0;
 }
 
 

@@ -2,6 +2,8 @@
 // Created by oldo on 5.10.16.
 //
 
+#include "memory.h"
+
 #ifndef IFJ_88_SCANNER_H
 #define IFJ_88_SCANNER_H
 
@@ -85,6 +87,7 @@ typedef enum{
 
 tToken getNextToken();
 
+extern tTableOfAddress * htable;
 
 #endif //IFJ_88_SCANNER_H
 

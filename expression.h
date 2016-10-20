@@ -61,15 +61,15 @@ typedef enum{
 typedef struct sStackUnit{
     int position;
     expressionRules rule;
-    struct sStackUnit *next;
+    struct sStackUnit *prev;
 }*tStackUnit;
 
 typedef struct sStackStart{
-    struct sStackUnit *first;
+    struct sStackUnit *last;
     struct sStackUnit *top;
 }*tStackStart;
 
-
+tStackStart exCreateStack();
 int processExp();
 
 #endif //IFJ_88_VYRAZY_H

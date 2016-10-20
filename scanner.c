@@ -15,12 +15,14 @@
 #include <stdio.h>
 #include "memory.h"
 #include "errors.h"
-#include "vyrazy.h"
+#include "expression.h"
 #include <string.h>
 #include <stdlib.h>
+
 tToken token;
 FILE *sourceFile;
 tTableOfAddress * htable;
+
 int temp=0;
 int main(int argc,char *argv[]){
     if((sourceFile = fopen("testovaci_subor2.txt", "r")) == NULL)
