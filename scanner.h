@@ -63,8 +63,13 @@ typedef enum{
 typedef enum{
     INTEGER = 50,
     DOUBLE,
+    SIMPLE_IDENTIFIKATOR_BRACKET,
+    SIMPLE_IDENTIFIKATOR,
+    FULLY_IDENTIFIKATOR,
+    FULLY_IDENTIFIKATOR_BRACKET,
     STRING,
-}numbers;
+
+}values;
 
 typedef enum{
     START = 80,
