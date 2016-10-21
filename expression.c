@@ -49,7 +49,7 @@ tStackStart exCreateStack(){
     stack->last = xMalloc(sizeof(struct sStackUnit), htable);
     stack->top = stack->last;
 
-    stack->last->numToken = END;
+    stack->last->numToken = EX_END;
     stack->last->position = 0;
     stack->last->prev = NULL;
 
@@ -61,8 +61,14 @@ tStackStart exDeleteStack(tStackStart stack){
     xFree(stack, htable);
 }
 
+//todo dorobit
 void sendIdToSEA(tToken token){
     return;
+}
+
+//todo dorobit
+int chceckIfId(tToken token){
+    if(token->numToken != 0);
 }
 
 void addToStackIdRule(tStackStart stack, int position, tToken token){
@@ -71,31 +77,33 @@ void addToStackIdRule(tStackStart stack, int position, tToken token){
 
     sendIdToSEA(token);
 
+    //todo dorobit
     if(token->numToken == FUNC)
         //SA_ActionForFun();
         ;
 
     unitStack->prev = stack->last;
     unitStack->position = position;
-    unitStack->numToken = RULE;
+    unitStack->numToken = EX_RULE;
     stack->last = unitStack;
 }
 
-void addToStackTopUnit(tStackStart stack, expressionRules rule, int position){
+void addToStackTopUnit(tStackStart stack, int rule){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
     unitStack->prev = stack->last;
-    unitStack->position = position;
+    unitStack->position = 0;
     unitStack->numToken = rule;
     stack->last = unitStack;
     stack->top = unitStack;
 }
 
-void checkIfReduceStack(tStackStart stack, tToken token){
+int checkIfReduceStack(tStackStart stack, tToken token){
     enumEquality reduceOption = precTable[stack->top->numToken][token->numToken];
+
 }
 
-void reduceUnitStack(){
+void reduceUnitStack(tStackStart stack){
 
 }
 

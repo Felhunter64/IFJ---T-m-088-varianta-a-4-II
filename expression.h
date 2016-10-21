@@ -30,7 +30,7 @@ typedef enum{
  */
 
 typedef enum{
-    GRE,    // >
+    GRE=0,    // >
     LES,    // <
     EQU,    // ==
     BAD     // syntakticka chyba

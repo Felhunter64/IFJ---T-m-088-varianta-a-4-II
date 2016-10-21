@@ -50,8 +50,8 @@ typedef enum{
     NOT_EQUAL,          // !=
     L_BRACKET,          // ( hotovo
     R_BRACKET,          // ) hotovo
-    RULE,                //pre expression.c //identifikator(premenna, funkcia, objekt(premenna), objekt(funkcia), literal)
-    END,               //pre expression.c //koniec
+    EX_RULE,                //pre expression.c //identifikator(premenna, funkcia, objekt(premenna), objekt(funkcia), literal)
+    EX_END,               //pre expression.c //koniec
     COMMA = 14,             // , hotovo
     L_PI_BRACKET,   // { hotovo
     R_PI_BRACKET,   // } hotovo
