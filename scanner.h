@@ -13,7 +13,7 @@ typedef struct sToken {
 }*tToken;
 
 typedef enum {
-    KEY_BOOLEAN=10,
+    KEY_BOOLEAN = 30,
     KEY_BREAK,
     KEY_CLASS,
     KEY_CONTINUE,
@@ -33,15 +33,15 @@ typedef enum {
 }keywords;
 
 typedef enum{
-    IDENT1=0,     //Jednoduchý identifikátor
+    IDENT1 = 25,     //Jednoduchý identifikátor
     IDENT2,     //Plně kvalifikovaný identifikátor
 }ident;
 
 typedef enum{
-    PLUS = 30,          // + hotovo
+    PLUS = 0,          // + hotovo
     MINUS,              // - hotovo
     MULTIPLY,               // * hotovo
-    DIVINE,             // /
+    DIVINE,             // /  //divine znamena bozsky :D
     LESS,           // <
     GREATER,           // >
     LESS_EQUAL,   // <=
@@ -50,22 +50,24 @@ typedef enum{
     NOT_EQUAL,          // !=
     L_BRACKET,          // ( hotovo
     R_BRACKET,          // ) hotovo
-    ASSIGN,           // =
+    RULE,                //pre expression.c //identifikator(premenna, funkcia, objekt(premenna), objekt(funkcia), literal)
+    END,               //pre expression.c //koniec
+    COMMA = 14,             // , hotovo
     L_PI_BRACKET,   // { hotovo
     R_PI_BRACKET,   // } hotovo
-    COMMA,             // , hotovo
-    DOT_COMMA        // ; hotovo
+    DOT_COMMA,        // ; hotovo
+    ASSIGN           // =
 
 }operators;
 
 typedef enum{
-    INTEGER=50,
+    INTEGER = 50,
     DOUBLE,
     STRING,
 }numbers;
 
 typedef enum{
-    START=80,
+    START = 80,
     END,
     CMP,
     LESS_STATE,
@@ -74,7 +76,7 @@ typedef enum{
     DIV_OR_COM,
     IDENTIFY,
     NUMBER,
-    MAYBE_STRING,
+    MAYBE_STRING, //maybe string?? :D....what about certainly :D
     LINE_COMMENT,
     END_COMMENT,
     MULTI_LINE_COMMENT,
@@ -82,7 +84,7 @@ typedef enum{
     DEC,
     DOUB,
     EXP,
-
+    FUNC //added, example: foo(
 }states;
 
 tToken getNextToken();

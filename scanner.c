@@ -30,7 +30,8 @@ int main(int argc,char *argv[]){
         return printErrors(13);
 
 
-
+    //delete
+    //printf("%d\n", R_BRACKET);
 
 
     if((htable = createHtable(100)) == NULL)

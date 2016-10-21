@@ -49,32 +49,57 @@ tStackStart exCreateStack(){
     stack->last = xMalloc(sizeof(struct sStackUnit), htable);
     stack->top = stack->last;
 
-    stack->last->rule = RULE_END;
+    stack->last->numToken = END;
     stack->last->position = 0;
     stack->last->prev = NULL;
 
     return stack;
 }
 
-//todo premenit id na pravidlo
-void addToStackIdRule(tStackStart stack, int position){
+tStackStart exDeleteStack(tStackStart stack){
+    xFree(stack->last, htable);
+    xFree(stack, htable);
+}
+
+void sendIdToSEA(tToken token){
+    return;
+}
+
+void addToStackIdRule(tStackStart stack, int position, tToken token){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
+
+
+    sendIdToSEA(token);
+
+    if(token->numToken == FUNC)
+        //SA_ActionForFun();
+        ;
 
     unitStack->prev = stack->last;
     unitStack->position = position;
-    unitStack->rule = RULE_RULE;
+    unitStack->numToken = RULE;
     stack->last = unitStack;
 }
 
-//todo pridat prvok ktory nie je pravidlo na zaciatku(nie je id)
 void addToStackTopUnit(tStackStart stack, expressionRules rule, int position){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
     unitStack->prev = stack->last;
     unitStack->position = position;
-    unitStack->rule = rule;
+    unitStack->numToken = rule;
     stack->last = unitStack;
+    stack->top = unitStack;
 }
+
+void checkIfReduceStack(tStackStart stack, tToken token){
+    enumEquality reduceOption = precTable[stack->top->numToken][token->numToken];
+}
+
+void reduceUnitStack(){
+
+}
+
+
 
 int processExp(){
     tToken token;
@@ -88,8 +113,7 @@ int processExp(){
 
     }
 
-
-    xFree(stack, htable);
+    exDeleteStack(stack);
 
     return 0;
 }

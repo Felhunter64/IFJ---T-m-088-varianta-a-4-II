@@ -2,6 +2,8 @@
 // Created by chronos on 10/11/16.
 //
 
+#include "scanner.h"
+
 #ifndef IFJ_88_VYRAZY_H
 #define IFJ_88_VYRAZY_H
 
@@ -39,9 +41,6 @@ typedef enum{
     RULE_RETURN,    // return Pouzit tu?
     RULE_IF,        // if Pouzit tu?
 
-    RULE_FUNC,      // zacina pouzitie nejakej funkcie - foo()
-    RULE_VAR,       // pouzitie premennej
-
     RULE_PLUS,               // x + y
     RULE_MINUS,              // x - y
     RULE_MULTIPLY,           // x * y
@@ -60,7 +59,7 @@ typedef enum{
 
 typedef struct sStackUnit{
     int position;
-    expressionRules rule;
+    int numToken;
     struct sStackUnit *prev;
 }*tStackUnit;
 
@@ -69,7 +68,18 @@ typedef struct sStackStart{
     struct sStackUnit *top;
 }*tStackStart;
 
+
+/*SA_EXPRESSIONS*/
+//stack
 tStackStart exCreateStack();
+tStackStart exDeleteStack(tStackStart);
 int processExp();
+
+//SA action functions
+//SA_ActionForFun();
+
+/*SEA*/
+//zapisat spravnu position, dat do tabulky
+void sendIdToSEA(tToken);
 
 #endif //IFJ_88_VYRAZY_H
