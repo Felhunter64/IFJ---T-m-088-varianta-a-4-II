@@ -67,7 +67,7 @@ typedef enum{
     SIMPLE_IDENTIFIKATOR,
     FULLY_IDENTIFIKATOR,
     FULLY_IDENTIFIKATOR_BRACKET,
-    STRING,
+    STRING = 56,
 
 }values;
 

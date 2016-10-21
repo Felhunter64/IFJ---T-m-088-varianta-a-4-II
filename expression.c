@@ -66,9 +66,11 @@ void sendIdToSEA(tToken token){
     return;
 }
 
-//todo dorobit
-int chceckIfId(tToken token){
-    if(token->numToken != 0);
+inline int chceckIfId(tToken token){
+    if(token->numToken >= 50 && token->numToken <= 56)
+        return 1;
+    else
+        return 0;
 }
 
 void addToStackIdRule(tStackStart stack, int position, tToken token){
@@ -98,16 +100,44 @@ void addToStackTopUnit(tStackStart stack, int rule){
     stack->top = unitStack;
 }
 
-int checkIfReduceStack(tStackStart stack, tToken token){
+inline int checkIfReduceStack(tStackStart stack, tToken token){
     enumEquality reduceOption = precTable[stack->top->numToken][token->numToken];
 
+    return reduceOption;
 }
 
 void reduceUnitStack(tStackStart stack){
+    int lastStack = stack->last;
 
+    //binary operator on top
+    if(lastStack >= PLUS && lastStack <= NOT_EQUAL)
+        if();
+
+    //EX_END on top
+    if(lastStack == EX_END)
+        ;
+
+    //left bracket on top
+    if(lastStack == L_BRACKET)
+        ;
+
+    //right bracket on top
+    if(lastStack == R_BRACKET)
+        ;
 }
-
-
+//delete
+/*
+int checkSyntax(tStackStart stack, tToken token){
+    int numToken = token->numToken;
+    int lastStack = stack->last;
+    if(lastStack == EX_END)
+        if()
+    switch(numToken){
+        case numT :
+            stack->last token->numToken;
+            break;
+    }
+}*/
 
 int processExp(){
     tToken token;
@@ -117,6 +147,22 @@ int processExp(){
 
         printf("%d : %s\n", token->numToken, token->stringToken);
 
+        int reduceOption = checkIfReduceStack(stack, token);
+
+        switch(reduceOption){
+            case GRE :
+                ;
+                break;
+            case LES :
+                ;
+                break;
+            case EQU :
+                ;
+                break;
+            case BAD :
+                ;
+                break;
+        }
 
 
     }
