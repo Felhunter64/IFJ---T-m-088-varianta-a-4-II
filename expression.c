@@ -108,10 +108,11 @@ inline int checkIfReduceStack(tStackStart stack, tToken token){
 
 void reduceUnitStack(tStackStart stack){
     int lastStack = stack->last;
+    int topStack = stack->top;
 
     //binary operator on top
-    if(lastStack >= PLUS && lastStack <= NOT_EQUAL)
-        if();
+    if(topStack >= PLUS && topStack <= NOT_EQUAL)
+        if(lastStack != EX_RULE || stack->top->prev->numToken != EX_RULE);
 
     //EX_END on top
     if(lastStack == EX_END)
