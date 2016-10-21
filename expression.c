@@ -42,6 +42,17 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
 
 //todo sendId(), sendRule(), counter, stack(push, pop, create)
 
+//delete
+int sendIdToSEA(tToken token){
+    return 0;
+}
+
+//delete
+int sendBinaryRuleToSEA(int leftRule, int operator, int rightRule){
+    return 0;
+}
+
+
 tStackStart exCreateStack(){
     tStackStart stack;
     stack = xMalloc(sizeof(struct sStackUnit), htable);
@@ -61,23 +72,21 @@ tStackStart exDeleteStack(tStackStart stack){
     xFree(stack, htable);
 }
 
-//todo dorobit
-void sendIdToSEA(tToken token){
-    return;
-}
 
-inline int chceckIfId(tToken token){
+//check if token can be added as idRule
+inline int checkIfId(tToken token){
     if(token->numToken >= 50 && token->numToken <= 56)
         return 1;
     else
         return 0;
 }
 
-void addToStackIdRule(tStackStart stack, int position, tToken token){
+//for the first time. It converts id immediately to rule
+void addToStackIdRule(tStackStart stack, tToken token){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
 
-    sendIdToSEA(token);
+    int position = sendIdToSEA(token);
 
     //todo dorobit
     if(token->numToken == FUNC)
@@ -90,6 +99,7 @@ void addToStackIdRule(tStackStart stack, int position, tToken token){
     stack->last = unitStack;
 }
 
+//for the first time it adds sign that is not id to stack
 void addToStackTopUnit(tStackStart stack, int rule){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
@@ -100,45 +110,65 @@ void addToStackTopUnit(tStackStart stack, int rule){
     stack->top = unitStack;
 }
 
+//add rule to stack after reduction
+void addToStackRule(tStackStart stack, int position, tStackUnit unitStack){
+
+    unitStack->position = position;
+    unitStack->numToken = EX_RULE;
+    stack->last = unitStack;
+    stack->top = unitStack->prev;
+
+}
+
 inline int checkIfReduceStack(tStackStart stack, tToken token){
     enumEquality reduceOption = precTable[stack->top->numToken][token->numToken];
+    //delete
+    //printf("top:%d %d\n", stack->top->numToken, token->numToken);
 
     return reduceOption;
 }
 
-void reduceUnitStack(tStackStart stack){
-    int lastStack = stack->last;
-    int topStack = stack->top;
+int reduceUnitStack(tStackStart stack){
+    tStackUnit lastStack = stack->last;
+    tStackUnit topStack = stack->top;
 
     //binary operator on top
-    if(topStack >= PLUS && topStack <= NOT_EQUAL)
-        if(lastStack != EX_RULE || stack->top->prev->numToken != EX_RULE);
+    //has to be rule on both sides
+    if(topStack->numToken >= PLUS && topStack->numToken <= NOT_EQUAL)
+        if(lastStack->numToken != EX_RULE || stack->top->prev->numToken != EX_RULE){
+            return 1;
+        }else{
+            int position = sendBinaryRuleToSEA(topStack->prev->position, topStack->numToken, lastStack->position);
+            addToStackRule(stack, position, topStack->prev);
+            xFree(lastStack, htable);
+            xFree(topStack, htable);
+        }
 
-    //EX_END on top
-    if(lastStack == EX_END)
+    //todo all 3
+    //right bracket on top
+    if(lastStack->numToken == R_BRACKET)
         ;
 
     //left bracket on top
-    if(lastStack == L_BRACKET)
+    if(lastStack->numToken == L_BRACKET)
         ;
 
-    //right bracket on top
-    if(lastStack == R_BRACKET)
+    //EX_END on top
+    if(lastStack->numToken == EX_END)
         ;
+
+    return 0;
 }
-//delete
-/*
-int checkSyntax(tStackStart stack, tToken token){
-    int numToken = token->numToken;
-    int lastStack = stack->last;
-    if(lastStack == EX_END)
-        if()
-    switch(numToken){
-        case numT :
-            stack->last token->numToken;
-            break;
-    }
-}*/
+
+//todo
+void showStack(tStackStart stack){
+
+}
+
+//todo
+int chceckIfEndSign(tToken token){
+
+}
 
 int processExp(){
     tToken token;
@@ -148,14 +178,23 @@ int processExp(){
 
         printf("%d : %s\n", token->numToken, token->stringToken);
 
-        int reduceOption = checkIfReduceStack(stack, token);
+        if(checkIfId(token)){
+            addToStackIdRule(stack, token);
+            //delete
+            //printf("ok\n");
+            continue;
+        }
 
-        switch(reduceOption){
-            case GRE :
-                ;
-                break;
+        //delete
+        //printf("check: %d\n", checkIfReduceStack(stack, token));
+
+        switch(checkIfReduceStack(stack, token)){
             case LES :
-                ;
+                addToStackTopUnit(stack, token->numToken);
+                break;
+            case GRE :
+                reduceUnitStack(stack);
+                exit(77);
                 break;
             case EQU :
                 ;

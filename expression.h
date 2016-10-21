@@ -73,6 +73,8 @@ typedef struct sStackStart{
 //stack
 tStackStart exCreateStack();
 tStackStart exDeleteStack(tStackStart);
+int checkIfReduceStack(tStackStart, tToken);
+int checkIfId(tToken);
 int processExp();
 
 //SA action functions
@@ -80,6 +82,10 @@ int processExp();
 
 /*SEA*/
 //zapisat spravnu position, dat do tabulky
-void sendIdToSEA(tToken);
+int sendIdToSEA(tToken);
+
+//params: (position of left rule, number of operand, position of right rule)
+//returns number of position
+int sendBinaryRuleToSEA(int leftRule, int operator, int rightRule);
 
 #endif //IFJ_88_VYRAZY_H
