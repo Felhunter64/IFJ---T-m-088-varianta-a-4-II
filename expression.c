@@ -103,7 +103,8 @@ void addToStackIdRule(tStackStart stack, tToken token){
     stack->last = unitStack;
 }
 
-//for the first time it adds sign that is not id to stack
+//for the first time it adds token that is not id to stack
+//todo if ',' and not func(), synError
 void addToStackTopUnit(tStackStart stack, int rule){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
@@ -166,6 +167,7 @@ int reduceUnitStack(tStackStart stack){
 
 void showStack(tStackStart stack){
     tStackUnit last = stack->last;
+    printf("stack:\n");
     while(last != NULL){
         printf("position: %d    numToken: %d\n", last->position, last->numToken);
         last = last->prev;
@@ -207,7 +209,7 @@ int chceckIfEndOrNextToken(tToken token, int* counterOfBrackets, int expOption){
 int processExp(int expOption){
     tToken token;
     tStackStart stack = exCreateStack();
-    int* counterOfBrackets;
+    int* counterOfBrackets = xMalloc(sizeof(int), htable);
     *counterOfBrackets = 1;
 
     //counts a number of brackets
@@ -255,11 +257,14 @@ int processExp(int expOption){
 
     }
 
+    //the EOF cannot occure in expression
     if(token->numToken == END){
         deleteHtable(htable);
         exit(SYN_ERROR);
     }
 
+    //free all used resources
+    xFree(counterOfBrackets, htable);
     exDeleteStack(stack);
 
     return 0;
