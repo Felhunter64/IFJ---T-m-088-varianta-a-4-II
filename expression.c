@@ -87,13 +87,7 @@ inline int checkIfId(tToken token){
 void addToStackIdRule(tStackStart stack, tToken token){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
 
-
     int position = sendIdToSEA(token);
-
-    //todo dorobit
-    if(token->numToken == FUNC)
-        //SA_ActionForFun();
-        ;
 
     unitStack->prev = stack->last;
     unitStack->position = position;
@@ -102,13 +96,17 @@ void addToStackIdRule(tStackStart stack, tToken token){
 }
 
 //for the first time it adds token that is not id to stack
-//todo if ',' and not func(), synError
-void addToStackTopUnit(tStackStart stack, int rule){
+void addToStackTopUnit(tStackStart stack, int numToken, int expOption){
     tStackUnit unitStack = xMalloc(sizeof(struct sStackUnit), htable);
+
+    if(expOption != RULE_FUNC && numToken == COMMA){
+        deleteHtable(htable);
+        exit(SYN_ERROR);
+    }
 
     unitStack->prev = stack->last;
     unitStack->position = 0;
-    unitStack->numToken = rule;
+    unitStack->numToken = numToken;
     stack->last = unitStack;
     stack->top = unitStack;
 }
@@ -199,6 +197,10 @@ int chceckIfEndToken(tToken token, int* counterOfBrackets, int expOption){
                 return 1;
             }
             return 0;
+        default :
+            deleteHtable(htable);
+            exit(INTERNAL_ERROR);
+
     }
 
     return 1;
@@ -214,7 +216,7 @@ int processExp(int expOption){
 
     while((token = getNextToken()) && token->numToken!= END){
 
-        //if token cannot be in expression at all
+        //if token cannot be in an expression at all,
         //the programm ends
         if(token->numToken < PLUS || token->numToken > COMMA){
             deleteHtable(htable);
@@ -222,11 +224,6 @@ int processExp(int expOption){
         }
 
         printf("%d : %s\n", token->numToken, token->stringToken);
-
-        //if tehre is no valid token just the EX_END token,
-        //the while cycle is stopped and only reduction is allowed
-        if(chceckIfEndToken(token, counterOfBrackets, expOption))
-                break;
 
         //counts a number of brackets
         //left bracket increases the number and right decreases
@@ -237,6 +234,11 @@ int processExp(int expOption){
                 (*counterOfBrackets)--;
         }
 
+        //if tehre is no valid token just the EX_END token,
+        //the while cycle is stopped and only reduction is allowed
+        if(chceckIfEndToken(token, counterOfBrackets, expOption))
+            break;
+
         //delete
         //printf("check: %d\n", checkIfReduceStack(stack, token));
 
@@ -245,11 +247,13 @@ int processExp(int expOption){
                 if(checkIfId(token))
                     addToStackIdRule(stack, token);
                 else
-                    addToStackTopUnit(stack, token->numToken);
+                    addToStackTopUnit(stack, token->numToken, expOption);
                 break;
             case GRE :
+                //delete
                 //showStack(stack);
                 reduceUnitStack(stack);
+                //delete
                 //showStack(stack);
                 exit(77);
                 break;
@@ -259,6 +263,9 @@ int processExp(int expOption){
             case BAD :
                 deleteHtable(htable);
                 exit(SYN_ERROR);
+            default :
+                deleteHtable(htable);
+                exit(INTERNAL_ERROR);
         }
 
 
@@ -269,7 +276,7 @@ int processExp(int expOption){
         exit(INTERNAL_ERROR);
     }
 
-    //reduce till top of stack is END token
+    //reduce till top of stack is EX_END token
     do{
         reduceUnitStack(stack);
     }while(stack->top->numToken != EX_END);
