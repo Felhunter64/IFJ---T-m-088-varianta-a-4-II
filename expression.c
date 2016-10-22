@@ -40,8 +40,6 @@ const enumEquality precTable[POCET_VYRAZOV][POCET_VYRAZOV]={
 };
 
 
-//todo sendId(), sendRule(), counter, stack(push, pop, create)
-
 //delete
 int sendIdToSEA(tToken token){
     return 0;
@@ -126,9 +124,12 @@ void addToStackRule(tStackStart stack, int position, tStackUnit unitStack){
 }
 
 inline int checkIfReduceStack(tStackStart stack, tToken token){
-    enumEquality reduceOption = precTable[stack->top->numToken][token->numToken];
-    //delete
-    //printf("top:%d %d\n", stack->top->numToken, token->numToken);
+    enumEquality reduceOption;
+
+    if(checkIfId(token))
+        reduceOption = precTable[stack->top->numToken][EX_RULE];
+    else
+        reduceOption = precTable[stack->top->numToken][token->numToken];
 
     return reduceOption;
 }
@@ -167,16 +168,15 @@ int reduceUnitStack(tStackStart stack){
 
 void showStack(tStackStart stack){
     tStackUnit last = stack->last;
-    printf("stack:\n");
+    printf("stack(from the last token):\n");
     while(last != NULL){
         printf("position: %d    numToken: %d\n", last->position, last->numToken);
         last = last->prev;
     }
 }
 
-//todo exp,while,func()
 //in case of end, the function returns 1
-int chceckIfEndOrNextToken(tToken token, int* counterOfBrackets, int expOption){
+int chceckIfEndToken(tToken token, int* counterOfBrackets, int expOption){
     switch(expOption){
         case RULE_ASSIGN :
             //if there is ';' expression ends
@@ -204,7 +204,7 @@ int chceckIfEndOrNextToken(tToken token, int* counterOfBrackets, int expOption){
     return 1;
 }
 
-//todo counter for brackets for ending token
+
 
 int processExp(int expOption){
     tToken token;
@@ -212,27 +212,29 @@ int processExp(int expOption){
     int* counterOfBrackets = xMalloc(sizeof(int), htable);
     *counterOfBrackets = 1;
 
-    //counts a number of brackets
-    //left bracket increases the number and right decreases
-    if(expOption == RULE_IF || expOption == RULE_FUNC){
-        if(token->numToken == L_BRACKET)
-            (*counterOfBrackets)++;
-        if(token->numToken == R_BRACKET)
-            (*counterOfBrackets)--;
-    }
-
     while((token = getNextToken()) && token->numToken!= END){
+
+        //if token cannot be in expression at all
+        //the programm ends
+        if(token->numToken < PLUS || token->numToken > COMMA){
+            deleteHtable(htable);
+            exit(SYN_ERROR);
+        }
 
         printf("%d : %s\n", token->numToken, token->stringToken);
 
+        //if tehre is no valid token just the EX_END token,
+        //the while cycle is stopped and only reduction is allowed
+        if(chceckIfEndToken(token, counterOfBrackets, expOption))
+                break;
 
-
-        //immediately adds id as a rule
-        if(checkIfId(token)){
-            addToStackIdRule(stack, token);
-            //delete
-            //printf("ok\n");
-            continue;
+        //counts a number of brackets
+        //left bracket increases the number and right decreases
+        if(expOption == RULE_IF || expOption == RULE_FUNC){
+            if(token->numToken == L_BRACKET)
+                (*counterOfBrackets)++;
+            if(token->numToken == R_BRACKET)
+                (*counterOfBrackets)--;
         }
 
         //delete
@@ -240,28 +242,38 @@ int processExp(int expOption){
 
         switch(checkIfReduceStack(stack, token)){
             case LES :
-                addToStackTopUnit(stack, token->numToken);
+                if(checkIfId(token))
+                    addToStackIdRule(stack, token);
+                else
+                    addToStackTopUnit(stack, token->numToken);
                 break;
             case GRE :
+                //showStack(stack);
                 reduceUnitStack(stack);
+                //showStack(stack);
                 exit(77);
                 break;
             case EQU :
                 ;
                 break;
             case BAD :
-                ;
-                break;
+                deleteHtable(htable);
+                exit(SYN_ERROR);
         }
 
 
     }
 
-    //the EOF cannot occure in expression
-    if(token->numToken == END){
+    if(token == NULL){
         deleteHtable(htable);
-        exit(SYN_ERROR);
+        exit(INTERNAL_ERROR);
     }
+
+    //reduce till top of stack is END token
+    do{
+        reduceUnitStack(stack);
+    }while(stack->top->numToken != EX_END);
+
 
     //free all used resources
     xFree(counterOfBrackets, htable);

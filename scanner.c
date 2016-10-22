@@ -36,7 +36,7 @@ int main(int argc,char *argv[]){
 
 
     if((htable = createHtable(100)) == NULL)
-        return printErrors(INTERNA_ERROR);
+        return printErrors(INTERNAL_ERROR);
     token = (tToken) xMalloc(sizeof(struct sToken), htable);
     token->stringToken = xMalloc(sizeof(char) * DLZKA_TOKENU, htable);
 

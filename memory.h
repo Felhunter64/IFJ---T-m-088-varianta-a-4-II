@@ -17,10 +17,10 @@ typedef struct sAddress{
 
 
 //vracia adresu na ktorej je malokovane miesto o velkosti size a zapise ju do hes tabulky htable
-//v pripade neuspechu ukonci program s navratovou hodnotou INTERNA_ERROR
+//v pripade neuspechu ukonci program s navratovou hodnotou INTERNAL_ERROR
 void* xMalloc(int size, tTableOfAddress *htable);
 //uvolni adresu ptr z hes tabulky htable, v pripade neuspechu
-// ukonci program s navratovou hodnotou INTERNA_ERROR
+// ukonci program s navratovou hodnotou INTERNAL_ERROR
 int xFree(void *ptr, tTableOfAddress *htable);
 void deleteHtable(tTableOfAddress *htable);
 tTableOfAddress* createHtable(int size);
