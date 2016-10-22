@@ -36,6 +36,7 @@ typedef enum{
     BAD     // syntakticka chyba
 }enumEquality;
 
+
 typedef enum{
     RULE_ASSIGN,    // = exp; , return exp;
     RULE_IF,        //while(exp), if(exp)
