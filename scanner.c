@@ -5,7 +5,8 @@
 //todo ked dostanem EOF tak freeujem string ....
 //todo namallocovanie stringu
 //todo prepisat enumVyrazy z knihovne vyrazy.h do anglictiny
-
+//todo zmen v errors.h nazv chyb na anglicke pomocou refactor->rename
+//todo robit todo!!!
 
 #define DLZKA_TOKENU 50
 
@@ -35,12 +36,12 @@ int main(int argc,char *argv[]){
 
 
     if((htable = createHtable(100)) == NULL)
-        return printErrors(INTERNA_CHYBA);
+        return printErrors(INTERNA_ERROR);
     token = (tToken) xMalloc(sizeof(struct sToken), htable);
     token->stringToken = xMalloc(sizeof(char) * DLZKA_TOKENU, htable);
 
-
-    processExp();
+    int expOption = RULE_ASSIGN;
+    processExp(expOption);
 
 
 //printf("%s\n",getNextToken()->stringToken);
@@ -189,10 +190,10 @@ tToken getNextToken(){
                     token->numToken = NOT_EQUAL;
                     return token;
                 } else {
-                    printErrors(LEX_CHYBA);
+                    printErrors(LEX_ERROR);
                     xFree(token,htable);
                     xFree(token->stringToken,htable);
-                    exit(LEX_CHYBA);
+                    exit(LEX_ERROR);
                 }
                 break;
             case DIV_OR_COM :
@@ -241,10 +242,10 @@ tToken getNextToken(){
                 break;
             case DEC :
                 if (isdigit(c)==0){
-                    printErrors(LEX_CHYBA);
+                    printErrors(LEX_ERROR);
                     xFree(token,htable);
                     xFree(token->stringToken,htable);
-                    exit(LEX_CHYBA);
+                    exit(LEX_ERROR);
                 } else {
                     countChar++;
                     //todo remaloc ak je viac ako 50 countchar
@@ -267,10 +268,10 @@ tToken getNextToken(){
                 if (c=='+' || c== '-') state=EXP;
                 if (isdigit(c)) state = DOUB;
                 if (isdigit(c)== 0){
-                    printErrors(LEX_CHYBA);
+                    printErrors(LEX_ERROR);
                     xFree(token,htable);
                     xFree(token->stringToken,htable);
-                    exit(LEX_CHYBA);
+                    exit(LEX_ERROR);
                 }
             break;
             case DOUB:

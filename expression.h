@@ -37,10 +37,12 @@ typedef enum{
 }enumEquality;
 
 typedef enum{
-    RULE_ASSIGN,    // = Pouzit tu?
-    RULE_RETURN,    // return Pouzit tu?
-    RULE_IF,        // if Pouzit tu?
+    RULE_ASSIGN,    // = exp; , return exp;
+    RULE_IF,        //while(exp), if(exp)
+    RULE_FUNC       //func(exp, exp)
+}expressionOption;
 
+typedef enum{
     RULE_PLUS,               // x + y
     RULE_MINUS,              // x - y
     RULE_MULTIPLY,           // x * y
@@ -74,8 +76,9 @@ typedef struct sStackStart{
 tStackStart exCreateStack();
 tStackStart exDeleteStack(tStackStart);
 int checkIfReduceStack(tStackStart, tToken);
+void showStack(tStackStart);
 int checkIfId(tToken);
-int processExp();
+int processExp(int);
 
 //SA action functions
 //SA_ActionForFun();
@@ -86,6 +89,9 @@ int sendIdToSEA(tToken);
 
 //params: (position of left rule, number of operand, position of right rule)
 //returns number of position
-int sendBinaryRuleToSEA(int leftRule, int operator, int rightRule);
+int sendBinaryOperatorRuleToSEA(int leftRule, int operator, int rightRule);
+
+//announce the end of expression to SEA
+void sendEndOfExpToSEA();
 
 #endif //IFJ_88_VYRAZY_H

@@ -48,10 +48,14 @@ int sendIdToSEA(tToken token){
 }
 
 //delete
-int sendBinaryRuleToSEA(int leftRule, int operator, int rightRule){
+int sendBinaryOperatorRuleToSEA(int leftRule, int operator, int rightRule){
     return 0;
 }
 
+//delete
+void sendEndOfExpToSEA(){
+    return;
+}
 
 tStackStart exCreateStack(){
     tStackStart stack;
@@ -138,7 +142,7 @@ int reduceUnitStack(tStackStart stack){
         if(lastStack->numToken != EX_RULE || stack->top->prev->numToken != EX_RULE){
             return 1;
         }else{
-            int position = sendBinaryRuleToSEA(topStack->prev->position, topStack->numToken, lastStack->position);
+            int position = sendBinaryOperatorRuleToSEA(topStack->prev->position, topStack->numToken, lastStack->position);
             addToStackRule(stack, position, topStack->prev);
             xFree(lastStack, htable);
             xFree(topStack, htable);
@@ -160,24 +164,68 @@ int reduceUnitStack(tStackStart stack){
     return 0;
 }
 
-//todo
 void showStack(tStackStart stack){
-
+    tStackUnit last = stack->last;
+    while(last != NULL){
+        printf("position: %d    numToken: %d\n", last->position, last->numToken);
+        last = last->prev;
+    }
 }
 
-//todo
-int chceckIfEndSign(tToken token){
+//todo exp,while,func()
+//in case of end, the function returns 1
+int chceckIfEndOrNextToken(tToken token, int* counterOfBrackets, int expOption){
+    switch(expOption){
+        case RULE_ASSIGN :
+            //if there is ';' expression ends
+            if(token->numToken == DOT_COMMA) {
+                sendEndOfExpToSEA();
+                return 1;
+            }
+            return 0;
+        case RULE_IF :
+            //if there is the same count of right and left
+            //brackets, the expression ends
+            if(*counterOfBrackets == 0) {
+                sendEndOfExpToSEA();
+                return 1;
+            }
+            return 0;
+        case RULE_FUNC :
+            if(*counterOfBrackets == 0) {
+                sendEndOfExpToSEA();
+                return 1;
+            }
+            return 0;
+    }
 
+    return 1;
 }
 
-int processExp(){
+//todo counter for brackets for ending token
+
+int processExp(int expOption){
     tToken token;
     tStackStart stack = exCreateStack();
+    int* counterOfBrackets;
+    *counterOfBrackets = 1;
+
+    //counts a number of brackets
+    //left bracket increases the number and right decreases
+    if(expOption == RULE_IF || expOption == RULE_FUNC){
+        if(token->numToken == L_BRACKET)
+            (*counterOfBrackets)++;
+        if(token->numToken == R_BRACKET)
+            (*counterOfBrackets)--;
+    }
 
     while((token = getNextToken()) && token->numToken!= END){
 
         printf("%d : %s\n", token->numToken, token->stringToken);
 
+
+
+        //immediately adds id as a rule
         if(checkIfId(token)){
             addToStackIdRule(stack, token);
             //delete
@@ -205,6 +253,11 @@ int processExp(){
         }
 
 
+    }
+
+    if(token->numToken == END){
+        deleteHtable(htable);
+        exit(SYN_ERROR);
     }
 
     exDeleteStack(stack);

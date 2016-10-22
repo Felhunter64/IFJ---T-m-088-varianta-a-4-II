@@ -111,18 +111,18 @@ void deleteHtable(tTableOfAddress *htable){
 }
 
 //malokuje pamat o velkosti size a zaroven adresu prida dao hes tabulky,
-//v pripade neuspechu ukonci program s navratovou hodnotou INTERNA_CHYBA
+//v pripade neuspechu ukonci program s navratovou hodnotou INTERNA_ERROR
 void* xMalloc(int size, tTableOfAddress *htable) {
     void *ptr;
 
     if ((ptr = malloc(size)) == NULL){
         deleteHtable(htable);
-        exit(INTERNA_CHYBA);
+        exit(INTERNA_ERROR);
     }
     //delete printf("%u\n", ptr);
     if (insertAddress(ptr, htable) == NULL){
         deleteHtable(htable);
-        exit(INTERNA_CHYBA);
+        exit(INTERNA_ERROR);
     }
 
     return ptr;
@@ -134,7 +134,7 @@ int xFree(void* ptr, tTableOfAddress *htable){
     //delete printf("free %u\n", address);
     if(address == NULL) {
         deleteHtable(htable);
-        exit(INTERNA_CHYBA);
+        exit(INTERNA_ERROR);
     }
 
     //delete printf("super%u\n", address);
@@ -149,25 +149,25 @@ int main(){
     char* aha;
     aha = xMalloc(4, htable);
     if(aha == NULL)
-        return INTERNA_CHYBA;
+        return INTERNA_ERROR;
 
     //delete printf("%u\n", aha);
 
-    if((xFree(aha, htable)) == INTERNA_CHYBA)
-        return INTERNA_CHYBA;
+    if((xFree(aha, htable)) == INTERNA_ERROR)
+        return INTERNA_ERROR;
 
     aha = xMalloc(4, htable);
     if(aha == NULL)
-        return INTERNA_CHYBA;
+        return INTERNA_ERROR;
     aha = xMalloc(4, htable);
     if(aha == NULL)
-        return INTERNA_CHYBA;
+        return INTERNA_ERROR;
     aha = xMalloc(4, htable);
     if(aha == NULL)
-        return INTERNA_CHYBA;
+        return INTERNA_ERROR;
     aha = xMalloc(4, htable);
     if(aha == NULL)
-        return INTERNA_CHYBA;
+        return INTERNA_ERROR;
     deleteHtable(htable);
 
     return 0;
